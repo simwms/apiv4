@@ -40,7 +40,7 @@
     "ember-addon"
   ],
   "dependencies": {
-    "autox": "foxnewsnetwork/autox#v0.1.10",
+    "autox": "foxnewsnetwork/autox#v0.1.11",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-coffeescript": "1.13.2",
     "ember-cli-babel": "^5.1.5"
