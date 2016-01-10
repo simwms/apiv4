@@ -4,7 +4,9 @@ defmodule Apiv4.Session do
   alias Apiv4.User
   @primary_key false
   schema "virtual:session-authentication" do
-    belongs_to :user, User
+    belongs_to :user, Apiv4.User
+    belongs_to :account, Apiv4.Account
+    belongs_to :employee, Apiv4.Employee
     field :id, :integer
     field :email, :string
     field :password, :string, virtual: true

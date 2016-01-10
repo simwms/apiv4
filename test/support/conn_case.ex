@@ -25,6 +25,7 @@ defmodule Apiv4.ConnCase do
       import Ecto.Query, only: [from: 2]
 
       import Apiv4.Router.Helpers
+      import Apiv4.SeedSupport
 
       # The default endpoint for testing
       @endpoint Apiv4.Endpoint

@@ -7,8 +7,10 @@ defmodule Apiv4.User do
     field :password_hash, :string
     field :recovery_hash, :string
     field :remember_token, :string
+    field :stripe_customer_id, :string
     field :forget_at, Ecto.DateTime
-
+    has_many :employees, Apiv4.Employee
+    has_many :accounts, Apiv4.Account
     timestamps
   end
 
@@ -26,6 +28,7 @@ defmodule Apiv4.User do
     |> unique_constraint(:email)
     |> prepare_changes(&encrypt_password/1)
     |> prepare_changes(&setup_remember_token/1)
+    |> initialize_stripe_customer
   end
 
   def update_changeset(model, params\\:empty) do
@@ -58,5 +61,18 @@ defmodule Apiv4.User do
     changeset
     |> put_change(:remember_token, token)
     |> put_change(:forget_at, date)
+  end
+
+  defp initialize_stripe_customer(%{valid?: false}=cs), do: cs
+  defp initialize_stripe_customer(changeset) do
+    email = changeset |> get_field(:email)
+    case Stripex.Customers.create(email: email) do
+      {:ok, %{id: id}} -> 
+        changeset 
+        |> put_change(:stripe_customer_id, id)
+      {:error, _} -> 
+        changeset 
+        |> add_error(:stripe_customer_id, "stripe customer currently undergoing service")
+    end
   end
 end

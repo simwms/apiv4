@@ -50,7 +50,6 @@ defmodule Apiv4.Router do
 
   scope "/print", Apiv4 do
     pipe_through [:browser, :echo] # Use the default browser stack
-
     the Report, [:show]
   end
 
@@ -66,10 +65,14 @@ defmodule Apiv4.Router do
   requires user account management authorization
   """
   scope "/api", Apiv4 do
-    pipe_through [:api, :auth, :account, :management]
-    the Camera, [:create, :update, :delete]
-    the Tile, [:create, :delete]
-    the Line, [:create, :update, :delete]
+    pipe_through [:api, :auth, :account, :management, :realtime]    
+    the Wall, [:create, :delete]
+    the Road, [:create, :delete]
+    the Gate, [:create, :delete]
+    the Dock, [:create, :delete]
+    the Cell, [:create, :delete]
+    the Desk, [:create, :delete]
+    the Scale, [:create, :delete]
     the Employee, [:create, :delete]
     an Account, [:delete, :update] do
       one ServicePlan, [:create, :delete]
@@ -80,38 +83,29 @@ defmodule Apiv4.Router do
   requires user account authentication
   """
   scope "/api", Apiv4 do
-    pipe_through [:api, :auth, :account]
-    the Camera, [:index, :show]
-    the Point
-    the Line, [:show, :index]
-    the Truck do
-      many [History, Picture]
-    end
+    pipe_through [:api, :auth, :account, :realtime]
+    the Wall, [:show, :index]
+    the Road, [:show, :index]
+    the Desk, [:show, :index], do: many [History, Camera]
+    the Gate, [:show, :index], do: many [History, Camera]
+    the Dock, [:show, :update, :index], do: many [History, Camera]
+    the Cell, [:show, :update, :index], do: many [History, Camera]
+    the Scale, [:show, :update, :index], do: many [History, Camera]
+    the Truck, do: many [History, Picture]
+    the Batch, do: many [History, Picture]
     the Weighticket
-    the Batch do
-      many [History, Picture]
-    end
-    the Employee, [:show, :index, :update] do
-      many [History, Picture]
+    the Employee, [:show, :index, :update], do: many [History, Picture]
+    the Company do
+      many Appointment
     end
     an Appointment do
-      one [Truck, Weighticket]
+      one [Truck, Weighticket, Company]
       many [Batch, History, Picture]
     end
   end
-
   scope "/api", Apiv4 do
-    pipe_through [:api, :echo, :auth, :account]
+    pipe_through [:api, :auth, :account]
     the Report, [:create]
-  end
-
-  scope "/api", Apiv4 do
-    pipe_through [:api, :auth, :account, :paranoia, :realtime]
-    the Tile, [:show, :index, :update] do
-      many [OnsiteTruck, OnsiteBatch, Employee]
-    end
-    the OnsiteTruck
-    the LiveAppointment
   end
 
   @moduledoc """
@@ -119,15 +113,10 @@ defmodule Apiv4.Router do
   """
   scope "/api", Apiv4 do
     pipe_through [:api, :auth]
-    an Account, [:create, :show] do
-      many [Camera, Tile, Point, Line, Truck, Weighticket, Batch, Employee, Picture, Appointment], [:index]
-      many [LiveAppointment, OnsiteBatch, OnsiteTruck], [:index]
-      one [AccountDetail, ServicePlan], [:show]
-    end
+    an Account, [:create, :show], do: one ServicePlan, [:show]
     an AccountDetail, [:show]
     the User, [:show, :update] do
-      many Account
-      many Employee, [:index]
+      many [Account, Employee], [:index]
     end
     can_logout!
   end
@@ -143,3 +132,4 @@ defmodule Apiv4.Router do
   end
 
 end
+

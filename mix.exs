@@ -32,7 +32,7 @@ defmodule Apiv4.Mixfile do
   def application do
     [mod: {Apiv4, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :autox]]
+                    :phoenix_ecto, :postgrex, :autox, :stripex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -51,6 +51,7 @@ defmodule Apiv4.Mixfile do
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
+     {:stripex, "~>0.1"},
      {:cowboy, "~> 1.0"}]
   end
 
@@ -62,6 +63,7 @@ defmodule Apiv4.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "autox.reset": ["autox.destroy.migrations", "autox.infer.migrations", "ecto.reset"]]
   end
 end

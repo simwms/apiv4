@@ -30,6 +30,9 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
+config :gateway, Stripex,
+  url: "https://api.stripe.com",
+  secret_key: "Bearer sk_test_GINswumlSKmkYRJ3lnno7Cqx"
 
 ## Autox Installed
 config :plug, :mimes, %{"application/vnd.api+json" => ["json-api"]}

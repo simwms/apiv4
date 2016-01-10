@@ -20,6 +20,7 @@ defmodule Apiv4.ModelCase do
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
       import Apiv4.ModelCase
+      import Apiv4.SeedSupport
     end
   end
 
