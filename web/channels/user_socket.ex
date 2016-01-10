@@ -2,11 +2,14 @@ defmodule Apiv4.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Apiv4.RoomChannel
+  channel "employees:*", Apiv4.EmployeeChannel
+  channel "accounts:*", Apiv4.AccountChannel
+  channel "users:*", Apiv4.UserChannel
+
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
-  # transport :longpoll, Phoenix.Transports.LongPoll
+  transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -19,8 +22,8 @@ defmodule Apiv4.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(params, socket) do
+    {:ok, assign(socket, :user_id, params["user_id"])}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
@@ -30,8 +33,8 @@ defmodule Apiv4.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     Apiv4.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
+  #     Apiv3.Endpoint.broadcast("users_socket:" <> user.id, "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(_socket), do: nil
+  def id(socket), do: "users:#{socket.assigns.user_id}"
 end

@@ -20,6 +20,7 @@ defmodule Apiv4.Router do
 
   pipeline :auth do
     plug Autox.AuthSessionPlug
+    plug Autox.SessionContextPlug, session: :user, context: :parent
   end
 
   pipeline :account do
