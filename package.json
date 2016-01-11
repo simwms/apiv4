@@ -18,6 +18,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "autox": "foxnewsnetwork/autox#v0.1.12",
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "0.7.1",
     "ember-cli": "2.2.0-beta.2",
@@ -40,7 +41,6 @@
     "ember-addon"
   ],
   "dependencies": {
-    "autox": "foxnewsnetwork/autox#v0.1.11",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-coffeescript": "1.13.2",
     "ember-cli-babel": "^5.1.5"
