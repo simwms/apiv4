@@ -38,7 +38,7 @@ defmodule Apiv4.Router do
   end
 
   pipeline :realtime do
-    plug Autox.BroadcastSessionPlug, :account
+    plug Autox.BroadcastSessionPlug, key: :account, class: Apiv4.Permissions, check: :live?
   end
 
   pipeline :echo do

@@ -2,6 +2,7 @@ defmodule Apiv4.Session do
   use Apiv4.Web, :model
   alias Apiv4.Repo
   alias Apiv4.User
+  alias Apiv4.Account
   @primary_key false
   schema "virtual:session-authentication" do
     belongs_to :user, Apiv4.User
@@ -15,7 +16,7 @@ defmodule Apiv4.Session do
   end
 
   @create_fields ~w(email password)
-  @update_fields @create_fields
+  @update_fields ~w(account_id employee_id)
   @optional_fields ~w(remember_me remember_token)
 
   def create_changeset(model, params\\:empty) do
@@ -26,7 +27,36 @@ defmodule Apiv4.Session do
   end
 
   def update_changeset(model, params\\:empty) do 
-    create_changeset(model, params)
+    model
+    |> cast(params, [], @update_fields)
+    |> validate_account_ownership
+  end
+
+  def validate_account_ownership(changeset) do
+    changeset 
+    |> get_field(:account_id)
+    |> case do
+      nil -> changeset
+      id ->
+        account = Repo.get(Account, id)
+        user = changeset.model |> Map.get(:user)
+        if account |> employs?(user) do
+          changeset |> put_change(:account, account)
+        else
+          changeset |> add_error(:account_id, "not affliated with that account")
+        end
+    end
+  end
+
+  def employs?(%{user_id: id}, %{id: id}), do: true
+  def employs?(account, user) do
+    account 
+    |> assoc(:employees) 
+    |> Repo.get_by(user_id: user.id)
+    |> case do
+      nil -> false
+      _ -> true
+    end
   end
 
   def validate_user_authenticity(%{valid?: false}=c), do: c
