@@ -1,4 +1,4 @@
-%{"autox": {:git, "https://github.com/foxnewsnetwork/autox.git", "3f410bd229c382e3c0a1420b2c58f747e78bf961", []},
+%{"autox": {:git, "https://github.com/foxnewsnetwork/autox.git", "f3331d8eb13c5b9e01377cccf9468a0cf7a8c3fb", []},
   "certifi": {:hex, :certifi, "0.3.0"},
   "combine": {:hex, :combine, "0.7.0"},
   "comeonin": {:hex, :comeonin, "1.6.0"},
