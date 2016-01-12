@@ -31,23 +31,19 @@ defmodule Apiv4.Endpoint do
   plug Plug.Head
   ## Autox Installed
   plug CORSPlug,
+    origin: [Autox.default_origin],
     headers: ["Authorization", "Content-Type", "Accept", "Origin",
               "User-Agent", "DNT","Cache-Control", "X-Mx-ReqToken",
               "Keep-Alive", "X-Requested-With", "If-Modified-Since",
               "X-CSRF-Token"] ++ [Autox.default_session_header]
   ## End Autox
-  
 
   plug Plug.Session,
     store: :cookie,
     key: "_apiv4_key",
-    signing_salt: "mUGXjsdd"
-
-  plug CORSPlug, 
-    headers: ["Authorization", "Content-Type", "Accept", "Origin",
-              "User-Agent", "DNT","Cache-Control", "X-Mx-ReqToken",
-              "Keep-Alive", "X-Requested-With", "If-Modified-Since",
-              "X-CSRF-Token"]
+    signing_salt: "mUGXjsdd",
+    http_only: false,
+    max_age: 26_800_000
 
   plug Apiv4.Router
 end

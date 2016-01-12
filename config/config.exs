@@ -19,12 +19,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :plug, :mimes, %{"application/vnd.api+json" => ["json-api"]}
-
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
@@ -37,6 +31,7 @@ config :gateway, Stripex,
 ## Autox Installed
 config :plug, :mimes, %{"application/vnd.api+json" => ["json-api"]}
 config :autox, Autox.Defaults,
+  host: "http://localhost:4200",
   repo: Apiv4.Repo,
   session_header: "autox-remember-token",
   simwms_master_key: "some-secret-key",
@@ -46,3 +41,6 @@ config :autox, Autox.Defaults,
   session_class: Apiv4.Session
 ## End Autox
 
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env}.exs"
