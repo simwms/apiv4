@@ -1,17 +1,16 @@
 defmodule Apiv4.Permissions do
   alias Autox.BroadcastSessionPlug, as: Bsp
-  alias Autox.SessionUtils, as: Su
 
-  def warehouse_employee?(conn) do
-    conn 
-    |> Su.current_session 
+  def warehouse_employee?(session) do
+    IO.inspect session
+    session
     |> Map.get(:account)
     |> valid?
   end
-  def warehouse_management?(conn), do: warehouse_employee?(conn)
+  def warehouse_management?(session), do: warehouse_employee?(session)
 
-  defp valid?(%{id: id}) when not is_nil(id), do: true
-  defp valid?(_), do: false
+  defp valid?(%{id: _}=a), do: {:ok, a}
+  defp valid?(a), do: {:error, a}
 
   def live?(conn) do
     Bsp.ok?(conn) && conn.assigns |> Map.get(:data) |> fresh?

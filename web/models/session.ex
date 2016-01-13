@@ -17,7 +17,7 @@ defmodule Apiv4.Session do
 
   @create_fields ~w(email password)
   @update_fields ~w(account_id employee_id)
-  @optional_fields ~w(remember_me remember_token)
+  @optional_fields ~w(remember_me remember_token) ++ @update_fields
 
   def create_changeset(model, params\\:empty) do
     model
@@ -29,7 +29,20 @@ defmodule Apiv4.Session do
   def update_changeset(model, params\\:empty) do 
     model
     |> cast(params, [], @update_fields)
+    |> validate_at_least_one(@update_fields)
     |> validate_account_ownership
+  end
+
+  def validate_at_least_one(changeset, []) do 
+    changeset |> cast(%{}, @update_fields)
+  end
+  def validate_at_least_one(changeset, [field|fields]) do
+    changeset 
+    |> get_field(field |> String.to_existing_atom)
+    |> case do
+      nil -> validate_at_least_one(changeset, fields)
+      _ -> changeset
+    end
   end
 
   def validate_account_ownership(changeset) do
