@@ -30,14 +30,14 @@ defmodule Apiv4.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   ## Autox Installed
-  @cors_headers ~w()
-  plug CORSPlug, [origin: Autox.default_origin, expose: ["_apiv4_key"]]
+  plug CORSPlug, [origin: Autox.default_origin]
   ## End Autox
 
-  plug Plug.Session,
+  plug Autox.InsecureSessionPlug,
     store: :cookie,
     key: "_apiv4_key",
     signing_salt: "mUGXjsdd",
+    max_age: 26_800_000,
     http_only: false
 
   plug Apiv4.Router
