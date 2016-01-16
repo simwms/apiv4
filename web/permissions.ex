@@ -2,7 +2,6 @@ defmodule Apiv4.Permissions do
   alias Autox.BroadcastSessionPlug, as: Bsp
 
   def warehouse_employee?(session) do
-    IO.inspect session
     session
     |> Map.get(:account)
     |> valid?
@@ -20,6 +19,7 @@ defmodule Apiv4.Permissions do
   def fresh?(%{golive_at: time_to_live, unlive_at: time_to_die}) do
     Ecto.DateTime.utc |> between?(time_to_live, time_to_die)
   end
+  def fresh?(_), do: false
 
   def between?(_, nil, nil), do: false
   def between?(x, nil, finish) when not is_nil(finish), do: x < finish

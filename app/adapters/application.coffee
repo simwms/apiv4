@@ -1,8 +1,9 @@
 `import Adapter from 'autox/adapters/application'`
 `import ENV from '../config/environment'`
 
-AppAdapter = Adapter.extend
+ApplicationAdapter = Adapter.extend
   host: ENV.host
   namespace: ENV.namespace
+  cookieKey: ENV.cookieKey
 
-`export default AppAdapter`
+`export default ApplicationAdapter`

@@ -1,5 +1,5 @@
 defmodule Apiv4.Mixfile do
-  use Mix.Project
+  use Mix.Project 
   ## Autox Installed
   @package_version ~r/"version":\s+"([a-zA-Z\d\.]+)"/
   def version do
@@ -12,7 +12,6 @@ defmodule Apiv4.Mixfile do
     |> List.last
   end
   ## End Autox
-  
 
   def project do
     [app: :apiv4,

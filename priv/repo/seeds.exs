@@ -14,7 +14,7 @@ alias Apiv4.Repo
 alias Apiv4.User
 alias Apiv4.ServicePlan
 
-User
+user = User
 |> struct
 |> User.create_changeset(%{"email" => "test@test.test", "password" => "password123"})
 |> Repo.insert!
@@ -25,4 +25,9 @@ ServicePlan
   "name" => "Default Free Test Plan",
   "description" => "Seed generated free test plan"
 })
+|> Repo.insert!
+ 
+user 
+|> Ecto.build_assoc(:accounts) 
+|> Apiv4.Account.create_changeset(%{"name" => "test-account", "timezone" => "Americas/Los_Angeles"}) 
 |> Repo.insert!

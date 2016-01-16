@@ -1,8 +1,9 @@
 `import Adapter from 'autox/adapters/relationship'`
 `import ENV from '../config/environment'`
 
-RelAdapter = Adapter.extend
+RelationshipAdapter = Adapter.extend
   host: ENV.host
   namespace: ENV.namespace
+  cookieKey: ENV.cookieKey
 
-`export default RelAdapter`
+`export default RelationshipAdapter`

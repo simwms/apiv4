@@ -4,9 +4,6 @@
 SessionAdapter = Adapter.extend
   host: ENV.host
   namespace: ENV.namespace
-
-  handleResponse: (status, headers, payload) ->
-    console.log headers
-    @_super arguments...
+  cookieKey: ENV.cookieKey
 
 `export default SessionAdapter`

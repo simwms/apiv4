@@ -33,7 +33,6 @@ config :plug, :mimes, %{"application/vnd.api+json" => ["json-api"]}
 config :autox, Autox.Defaults,
   host: "http://localhost:4200",
   repo: Apiv4.Repo,
-  session_header: "autox-remember-token",
   simwms_master_key: "some-secret-key",
   error_view: Apiv4.ErrorView,
   user_class: Apiv4.User,
