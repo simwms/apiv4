@@ -2,6 +2,7 @@
 `import DS from 'ember-data'`
 
 {computed} = Ember
+{oneWay} = computed
 
 TileCoreMixin = Ember.Mixin.create
   type: "tile"
