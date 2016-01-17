@@ -1,6 +1,12 @@
 defmodule Apiv4.Router do
   use Apiv4.Web, :router
-  
+  @moduledoc """
+  The router is where I describe how my data are related to each other
+  as well as how they relate to the context at hand.
+
+  In a separate file, say character.ex, I would find the description
+  for the individual data in my app.
+  """
   ## Autox Installed
   import Autox.Manifest
   pipeline :api do
