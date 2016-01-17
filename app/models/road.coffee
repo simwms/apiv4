@@ -9,7 +9,7 @@ Model = DS.Model.extend RelateableMixin,
   
   lineName: DS.attr "string"
   
-  points: DS.attr "string"
+  points: DS.attr "points"
   
   updatedAt: DS.attr "moment"
   
