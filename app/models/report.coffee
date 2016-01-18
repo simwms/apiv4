@@ -1,13 +1,13 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
+`import Ember from 'ember'`
+{computed: {alias}} = Ember
 
 Model = DS.Model.extend RelateableMixin,
-  
-  finishAt: DS.attr "moment"
-  
-  startAt: DS.attr "moment"
-  
+  goliveAt: DS.attr "moment"
+  unliveAt: DS.attr "moment"
 
-  
+  startAt: alias "goliveAt"
+  finishAt: alias "unliveAt"  
 
 `export default Model`

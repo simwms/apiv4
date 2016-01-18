@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4">
+      <h4>SimWMS Logo</h4>
+      <a href="javascript:window.print()" class="btn btn-lg btn-default hidden-print">Print</a>
+    </div>
+    <div class="col-xs-offset-4 col-xs-4">
+      <h4>Report Parameters</h4>
+      <div class="well">
+        <ul class="list-inline">
+          <li>
+            <label>Start Date:</label>
+            <span><%= assigns.start_at || "The Beginning" %></span>
+          </li>
+          <li>
+            <label>End Date:</label>
+            <span><%= assigns.finish_at || "Right Now" %></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4 class="alert alert-info">Appointment Summary</h4>
+      <table class="report-contents table table-stripped">
+        <thead>
+          <tr>
+            <th>Appt No.</th>
+            <th>Company</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for appointment <- assigns.appointments do %>
+            <tr>
+              <td>
+                <%= appointment_type appointment %>
+                <%= appointment.permalink %>
+              </td>
+              <td><%= appointment.company %></td>
+              <td><%= material_description appointment %></td>
+              <td>
+                <%= infer_status_message appointment %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Future Appointments</td>
+            <td><%= Enum.count planned_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Ongoing Appointments</td>
+            <td><%= Enum.count ongoing_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Problem Appointments</td>
+            <td><%= Enum.count problem_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Missed Appointments</td>
+            <td><%= Enum.count missing_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Cancelled Appointments</td>
+            <td><%= Enum.count cancelled_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Fulfilled Appointments</td>
+            <td><%= Enum.count fulfiled_filter assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total Appointments</td>
+            <td><%= Enum.count assigns.appointments %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4 class="alert alert-info">Load Batch Summary</h4>
+      <table class="table table-stripped">
+        <thead>
+          <tr>
+            <th>Appt No.</th>
+            <th>Stored At</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for {batch, type} <- all_batches(assigns.appointments) do %>
+            <tr>
+              <td>
+                <i class="fa <%= fa_class type %>"></i>
+                <%= appt_permalink batch %>
+              </td>
+              <td><%= storage_position batch.warehouse %></td>
+              <td>
+                <%= batch.quantity %>
+                -
+                <%= batch.description %>
+              </td>
+              <td><%= batch.inserted_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Incoming Batches</td>
+            <td><%= Enum.count incoming_batches assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Outgoing Batches</td>
+            <td><%= Enum.count outgoing_batches assigns.appointments %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total Batch Transactions</td>
+            <td><%= Enum.count all_batches assigns.appointments %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
