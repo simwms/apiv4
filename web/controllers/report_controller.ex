@@ -13,7 +13,7 @@ defmodule Apiv4.ReportController do
     |> assoc(:appointments) 
     |> ReportQuery.appointments(report) 
     |> Repo.all
-    assigns = report |> Map.take([:start_at, :finish_at]) |> Map.put(:appointments, appointments)
+    assigns = report |> Map.take([:golive_at, :unlive_at]) |> Map.put(:appointments, appointments)
     conn
     |> Phoenix.Controller.put_layout("print.html")
     |> render("show.html", assigns)

@@ -10,11 +10,11 @@
         <ul class="list-inline">
           <li>
             <label>Start Date:</label>
-            <span><%= assigns.start_at || "The Beginning" %></span>
+            <span><%= assigns.golive_at || "The Beginning" %></span>
           </li>
           <li>
             <label>End Date:</label>
-            <span><%= assigns.finish_at || "Right Now" %></span>
+            <span><%= assigns.unlive_at || "Right Now" %></span>
           </li>
         </ul>
       </div>

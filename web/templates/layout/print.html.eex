@@ -12,6 +12,6 @@
   </head>
 
   <body>
-    <%= @inner %>
+    <%= render @view_module, @view_template, assigns %>
   </body>
 </html>

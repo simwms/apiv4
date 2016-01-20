@@ -4,20 +4,13 @@
 Model = DS.Model.extend RelateableMixin,
   
   deletedAt: DS.attr "moment"
-  
-  description: DS.attr "string"
-  
-  externalReference: DS.attr "string"
-  
-  goliveAt: DS.attr "moment"
-  
   insertedAt: DS.attr "moment"
-  
-  unliveAt: DS.attr "moment"
-  
   updatedAt: DS.attr "moment"
   
-
+  description: DS.attr "string"
+  externalReference: DS.attr "string"
+  goliveAt: DS.attr "moment"
+  unliveAt: DS.attr "moment"
   
   batches: DS.hasMany "batch", async: true
   

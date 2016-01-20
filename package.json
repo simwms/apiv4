@@ -45,9 +45,13 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-htmlbars": "^1.0.1",
+    "brunch": "^1.8.5",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "ember-cli-babel": "^5.1.5",
     "ember-cli-coffeescript": "1.13.2",
-    "ember-cli-babel": "^5.1.5"
+    "ember-cli-htmlbars": "^1.0.1",
+    "sass-brunch": "^1.8.10"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

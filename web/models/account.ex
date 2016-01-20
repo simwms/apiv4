@@ -24,6 +24,7 @@ defmodule Apiv4.Account do
     has_many :employees, Apiv4.Employee
     has_many :weightickets, Apiv4.Weighticket
     has_many :reports, Apiv4.Report
+    has_many :companies, Apiv4.Company
     timestamps
   end
 
