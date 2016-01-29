@@ -11,7 +11,7 @@ TileCoreMixin = Ember.Mixin.create
     description: "The specified name of the this tile"
     display: ["show", "index"]
     modify: ["new", "edit"]
-  status: DS.attr "string"
+  status: DS.attr "string",
     label: "Status"
     description: "The realtime value of the physical status of this tile"
     display: ["show", "index"]

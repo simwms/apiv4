@@ -40,19 +40,19 @@
     "ember-notify": "4.3.1",
     "ember-phoenix-chan": "foxnewsnetwork/ember-phoenix-chan#v0.1.9",
     "ember-resolver": "^2.0.3",
-    "ember-try": "~0.0.8"
+    "ember-try": "~0.0.8",
+    "brunch": "^1.8.5",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "sass-brunch": "^1.8.10"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "brunch": "^1.8.5",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-coffeescript": "1.13.2",
     "ember-cli-htmlbars": "^1.0.1",
-    "sass-brunch": "^1.8.10"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
