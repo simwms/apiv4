@@ -3,7 +3,6 @@ defmodule Apiv4.History do
 
   schema "polymorphic:histories" do
     field :recordable_id, :integer
-    field :permalink, :string
     field :type, :string
     field :name, :string
     field :message, :string

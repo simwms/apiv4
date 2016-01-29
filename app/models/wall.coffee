@@ -3,6 +3,7 @@
 `import LineCore from 'apiv4/mixins/line-core'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
 
-Model = DS.Model.extend RelateableMixin, LineCore, Timestamps, {}
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin, LineCore, Timestamps, {}
 
 `export default Model`

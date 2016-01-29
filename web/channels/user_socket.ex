@@ -23,6 +23,7 @@ defmodule Apiv4.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(params, socket) do
+    IO.inspect params
     {:ok, assign(socket, :user_id, params["user_id"])}
   end
 

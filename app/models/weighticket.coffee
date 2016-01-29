@@ -2,7 +2,8 @@
 `import {RelateableMixin} from 'autox'`
 `import moment from 'moment'`
 
-Model = DS.Model.extend RelateableMixin,
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin,
   arrivePounds: DS.attr "number"
   departPounds: DS.attr "number"
   externalReference: DS.attr "string"
@@ -12,7 +13,6 @@ Model = DS.Model.extend RelateableMixin,
 
   goliveAt: DS.attr "moment", defaultValue: -> moment()
   unliveAt: DS.attr "moment"
-  insertedAt: DS.attr "moment"
-  updatedAt: DS.attr "moment"
+
 
 `export default Model`

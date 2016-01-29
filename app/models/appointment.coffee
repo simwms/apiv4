@@ -1,24 +1,31 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
+`import Realtime from 'apiv4/mixins/realtime'`
+`import Paranoia from 'apiv4/mixins/timestamps'`
+`import Timestamps from 'apiv4/mixins/timestamps'`
 
-Model = DS.Model.extend RelateableMixin,
-  
-  deletedAt: DS.attr "moment"
-  insertedAt: DS.attr "moment"
-  updatedAt: DS.attr "moment"
-  
-  description: DS.attr "string"
-  externalReference: DS.attr "string"
-  goliveAt: DS.attr "moment"
-  unliveAt: DS.attr "moment"
+Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,  
+  description: DS.attr "string",
+    description: "Extra notes regarding this appointment"
+    modify: ["new", "edit"]
+    display: ["show"]
+  externalReference: DS.attr "string",
+    label: "External Reference Number"
+    description: "In case you use another appointment management system"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
   
   batches: DS.hasMany "batch", async: true
-  
-  company: DS.belongsTo "company", async: true
-  
   histories: DS.hasMany "history", async: true
-  
   pictures: DS.hasMany "picture", async: true
+  
+  company: DS.belongsTo "company",
+    label: "Related Company"
+    description: "The associated company with whom this appointment is for"
+    display: ["show", "index"]
+    modify: ["new"]
+    among: (_, store) -> store.findAll "company"
+    async: true
   
   truck: DS.belongsTo "truck", async: true
   

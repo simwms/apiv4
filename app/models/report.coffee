@@ -3,7 +3,8 @@
 `import Ember from 'ember'`
 {computed: {alias}} = Ember
 
-Model = DS.Model.extend RelateableMixin,
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin,
   goliveAt: DS.attr "moment"
   unliveAt: DS.attr "moment"
 

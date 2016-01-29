@@ -6,14 +6,43 @@
 
 TileCoreMixin = Ember.Mixin.create
   type: "tile"
-  tileName: DS.attr "string"
+  tileName: DS.attr "string",
+    label: "Tile Name"
+    description: "The specified name of the this tile"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
   status: DS.attr "string"
-  x: DS.attr "number", defaultValue: 0
-  y: DS.attr "number", defaultValue: 0
-  z: DS.attr "number"
-  a: DS.attr "number"
-  width: DS.attr "number", defaultValue: 1
-  height: DS.attr "number", defaultValue: 1
+    label: "Status"
+    description: "The realtime value of the physical status of this tile"
+    display: ["show", "index"]
+  x: DS.attr "number", 
+    defaultValue: 0
+    label: "Grid X Position"
+    description: "The horizontal coordinate of grid position from the top left corner"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
+  
+  y: DS.attr "number", 
+    defaultValue: 0
+    label: "Grid Y Position"
+    description: "The vertical coordinate of grid position from the top left corner"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
+
+  a: DS.attr "number",
+    label: "Rotation angle"
+    description: "the degree of rotation of a tile about its center"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
+  z: DS.attr "number",
+    label: "Z-Position"
+    description: "The currently unsupported coordinate for height out of the screen"
+  width: DS.attr "number", 
+    description: "The length of a tile in the X-direction in grid coordinates"
+    defaultValue: 1
+  height: DS.attr "number",
+    description: "The length of a tile in the Y-direction in grid coordinates"
+    defaultValue: 1
 
   tileType: oneWay "constructor.modelName"
 

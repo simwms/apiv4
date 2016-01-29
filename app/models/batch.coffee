@@ -1,23 +1,20 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
+`import Realtime from 'apiv4/mixins/realtime'`
+`import Paranoia from 'apiv4/mixins/timestamps'`
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RealTime, Paranoia, RelateableMixin,  
+  description: DS.attr "string",
+    label: "Quality Description"
+    description: "Extra notes regarding this load"
+    modify: ["new", "edit"]
+    display: ["show"]
 
-Model = DS.Model.extend RelateableMixin,
-  
-  deletedAt: DS.attr "moment"
-  
-  description: DS.attr "string"
-  
-  goliveAt: DS.attr "moment"
-  
-  insertedAt: DS.attr "moment"
-  
-  quantity: DS.attr "string"
-  
-  unliveAt: DS.attr "moment"
-  
-  updatedAt: DS.attr "moment"
-  
-
+  quantity: DS.attr "string",
+    label: "Quantity"
+    description: "The amount of stuff inside this load"
+    modify: ["new", "edit"]
+    display: ["show"]
   
   histories: DS.hasMany "history", async: true
   

@@ -38,6 +38,7 @@ defmodule Apiv4.Endpoint do
 
   ## Autox Installed
   plug CORSPlug,
+    origin: "*",
     headers: CORSPlug.defaults[:headers] ++ ["_apiv4_key"],
     expose: ["_apiv4_key"]
   ## End Autox

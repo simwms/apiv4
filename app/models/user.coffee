@@ -1,14 +1,13 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
 
-Model = DS.Model.extend RelateableMixin,
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin,
   
   email: DS.attr "string"
   
   forgetAt: DS.attr "moment"
-  
-  insertedAt: DS.attr "moment"
-  
+
   password: DS.attr "string"
   
   passwordHash: DS.attr "string"
@@ -18,11 +17,7 @@ Model = DS.Model.extend RelateableMixin,
   rememberToken: DS.attr "string"
   
   stripeCustomerId: DS.attr "string"
-  
-  updatedAt: DS.attr "moment"
-  
 
-  
   accounts: DS.hasMany "account", async: true
   
   employees: DS.hasMany "employee", async: true

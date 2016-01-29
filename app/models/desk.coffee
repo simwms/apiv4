@@ -3,7 +3,8 @@
 `import TileCore from 'apiv4/mixins/tile-core'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
 
-Model = DS.Model.extend RelateableMixin, TileCore, Timestamps,
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin, TileCore, Timestamps,
   cameras: DS.hasMany "camera", async: true
   histories: DS.hasMany "history", async: true
 

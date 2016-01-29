@@ -12,7 +12,7 @@ defmodule Apiv4.Weighticket do
 
     belongs_to :account, Apiv4.Account
     belongs_to :appointment, Apiv4.Appointment
-
+    
     timestamps
   end
 

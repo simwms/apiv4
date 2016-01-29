@@ -1,7 +1,8 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
 
-Model = DS.Model.extend RelateableMixin,
+`import Timestamps from 'apiv4/mixins/timestamps'`
+Model = DS.Model.extend Timestamps, RelateableMixin,
   
   amount: DS.attr "number"
   
@@ -16,9 +17,7 @@ Model = DS.Model.extend RelateableMixin,
   docks: DS.attr "number"
   
   employees: DS.attr "number"
-  
-  insertedAt: DS.attr "moment"
-  
+
   interval: DS.attr "string"
   
   intervalCount: DS.attr "number"
@@ -30,10 +29,5 @@ Model = DS.Model.extend RelateableMixin,
   scales: DS.attr "number"
   
   stripePlanId: DS.attr "string"
-  
-  updatedAt: DS.attr "moment"
-  
-
-  
 
 `export default Model`
