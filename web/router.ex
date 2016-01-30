@@ -97,10 +97,15 @@ defmodule Apiv4.Router do
     the Desk, [:show, :index], do: many [History, Camera]
     the Gate, [:show, :index], do: many [History, Camera]
     the Dock, [:show, :update, :index], do: many [History, Camera]
-    the Cell, [:show, :update, :index], do: many [History, Camera]
+    the Cell, [:show, :update, :index] do 
+      many [History, Camera, Batch]
+    end
     the Scale, [:show, :update, :index], do: many [History, Camera]
     the Truck, do: many [History, Picture]
-    the Batch, do: many [History, Picture]
+    the Batch do
+      many [History, Picture]
+      one [Cell, Appointment]
+    end
     the Weighticket
     the Employee, [:show, :index, :update], do: many [History, Picture]
     the Company do

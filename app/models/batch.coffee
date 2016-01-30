@@ -16,6 +16,19 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     modify: ["new", "edit"]
     display: ["show"]
   
+  cell: DS.belongsTo "cell",
+    label: "Storage Cell"
+    description: "The on-site storage cell where this load will be stored"
+    among: (_, store) -> store.findAll "cell"
+    display: ["show"]
+    modify: ["edit"]
+    async: true
+
+  appointment: DS.belongsTo "appointment",
+    label: "Drop Off Appointment"
+    description: "The appointment which dropped this load off into our warehouse"
+    display: ["show"]
+    async: true
   histories: DS.hasMany "history", async: true
   
   pictures: DS.hasMany "picture", async: true

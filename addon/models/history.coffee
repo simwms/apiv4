@@ -9,18 +9,22 @@ History = DS.Model.extend RelateableMixin, Timestamps,
     label: "Event Type"
     description: "A macro that facilitates search and filtering of events"
     display: ["show", "index"]
+    modify: ["new"]
   name: DS.attr 'string',
     label: "Event Name"
     description: "The name of this historical event"
     display: ["show", "index"]
+    modify: ["new"]
   message: DS.attr 'string',
     label: "Event Summary"
     description: "A message visible to the user that explain to the user the significance of this event"
     display: ["show"]
+    modify: ["new"]
   scheduledAt: DS.attr 'moment',
     label: "Evented Scheduled For"
     description: "The expected UTC time for when this event is planned to happen"
     display: ["show"]
+    modify: ["new"]
   happenedAt: DS.attr 'moment',
     label: "Evented Happened At"
     description: "The actual UTC time when this event took place"
