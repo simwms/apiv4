@@ -13,6 +13,6 @@ RealtimeMixin = Ember.Mixin.create
     label: "Time of Completion"
     description: "The UTC date time when this object completes its live onsite work"
     display: ["show", "index"]
-    modify: ["edit", "new"]
+    modify: ["edit"]
 
 `export default RealtimeMixin`

@@ -6,5 +6,6 @@
 Model = DS.Model.extend Timestamps, RelateableMixin, TileCore,
   cameras: DS.hasMany "camera", async: true
   histories: DS.hasMany "history", async: true
+  batches: DS.hasMany "batches", async: true
 
 `export default Model`
