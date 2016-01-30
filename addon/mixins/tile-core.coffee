@@ -15,6 +15,7 @@ TileCoreMixin = Ember.Mixin.create
     label: "Status"
     description: "The realtime value of the physical status of this tile"
     display: ["show", "index"]
+    modify: ["edit"]
   x: DS.attr "number", 
     defaultValue: 0
     label: "Grid X Position"
