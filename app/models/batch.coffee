@@ -19,13 +19,5 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
   histories: DS.hasMany "history", async: true
   
   pictures: DS.hasMany "picture", async: true
-  
-  cell: DS.belongsTo "cell",
-    label: "Storage Cell"
-    description: "The onsite storage cell where this batch will be stored"
-    display: ["show"]
-    modify: ["edit"]
-    among: (_, store) -> store.peekAll "cell"
-    async: true
 
 `export default Model`
