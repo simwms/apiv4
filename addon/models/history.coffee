@@ -1,7 +1,10 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
 `import Timestamps from '../mixins/timestamps'`
-
+`import {Macros} from 'ember-cpm'`
+`import Ember from 'ember'`
+{RSVP} = Ember
+{computedPromise} = Macros
 History = DS.Model.extend RelateableMixin, Timestamps,
   recordableId: DS.attr "string",
     description: "The polymorphic id of an object that supports histories"
@@ -37,5 +40,11 @@ History = DS.Model.extend RelateableMixin, Timestamps,
     label: "Mentioned id"
     description: "The id model object which is related to this event"
     display: ["show"]
+
+  mentionedModel: computedPromise "mentionedType", "mentionedId", ->
+    type = @get "mentionedType"
+    id = @get "mentionedId"
+    return RSVP.resolve() if isBlank(id) or isBlank(type)
+    @store.findRecord type, id
 
 `export default History`

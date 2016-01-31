@@ -7,6 +7,15 @@ class History
     mentionedType: model.constructor.modelName
     mentionedId: model.id
 
+  @truckEntry = ({truck, gate}) ->
+    core = 
+      name: "truck-entrance"
+      type: "pair"
+      scheduledAt: moment()
+      happenedAt: moment()
+      message: "truck arrived at entrance"
+    truck: merge core, identify(truck)
+    gate: merge core, identify(gate)
   @truckScale = ({truck, scale}) ->
     core = 
       name: "truck-scale"
@@ -25,4 +34,13 @@ class History
       message: "truck arrived at dock"
     truck: merge core, identify(truck)
     dock: merge core, identify(dock)
+  @truckExit = ({truck, gate}) ->
+    core = 
+      name: "truck-exit"
+      type: "single"
+      scheduledAt: moment()
+      happenedAt: moment()
+      message: "truck has left the site"
+    truck: merge core, identify(truck)
+    gate: merge core, identify(gate)
 `export default History`

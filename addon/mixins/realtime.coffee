@@ -12,7 +12,7 @@ RealtimeMixin = Ember.Mixin.create
   unliveAt: DS.attr "moment",
     label: "Time of Completion"
     description: "The UTC date time when this object completes its live onsite work"
-    display: ["show", "index"]
+    display: ["show"]
     modify: ["edit"]
 
 `export default RealtimeMixin`
