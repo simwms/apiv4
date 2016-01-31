@@ -25,6 +25,7 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
     display: ["show", "index"]
     modify: ["new"]
     among: (_, store) -> store.findAll "company"
+    proxyKey: "name"
     async: true
   
   truck: DS.belongsTo "truck", async: true

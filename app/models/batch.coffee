@@ -29,6 +29,7 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     description: "The appointment which dropped this load off into our warehouse"
     display: ["show"]
     async: true
+    defaultValue: (router) -> router.modelFor "manager.appointment"
   histories: DS.hasMany "history", async: true
   
   pictures: DS.hasMany "picture", async: true
