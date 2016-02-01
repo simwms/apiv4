@@ -28,7 +28,7 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
     label: "Related Company"
     description: "The associated company with whom this appointment is for"
     display: ["show", "index"]
-    modify: ["new"]
+    modify: ["new", "edit"]
     among: (_, store) -> store.findAll "company"
     proxyKey: "name"
     async: true
