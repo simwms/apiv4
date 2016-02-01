@@ -53,7 +53,7 @@ test "visit /", (assert) ->
       assert.ok truck.id, "we should have a truck id"
       @truck = truck
   andThen =>
-    {truck, dock} = History.truckDock truck: @truck, dock: @dock
+    {truck, dock} = History.truckEnterDock truck: @truck, dock: @dock
     @truckRel = @truck.relate("histories").associate truck
     @dockRel = @truck.relate("histories").associate dock
     assert.ok @truckRel
