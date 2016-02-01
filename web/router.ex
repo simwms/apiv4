@@ -104,7 +104,7 @@ defmodule Apiv4.Router do
     the Truck, do: many [History, Picture]
     the Batch do
       many [History, Picture]
-      one [Cell, Appointment]
+      one [Cell, InAppointment, OutAppointment]
     end
     the Weighticket
     the Employee, [:show, :index, :update], do: many [History, Picture]
@@ -113,7 +113,7 @@ defmodule Apiv4.Router do
     end
     an Appointment do
       one [Truck, Weighticket, Company]
-      many [Batch, History, Picture]
+      many [InBatch, OutBatch, History, Picture]
     end
   end
   scope "/api", Apiv4 do

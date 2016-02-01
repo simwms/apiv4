@@ -24,14 +24,14 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   tileImage: "assets/image/truck.png"
   width: 0.5
   height: 0.5
-  origin: computedPromise "histories", ->
+  origin: computedPromise "lastTile", ->
+    @get "lastTile"
+    ?.get "origin"
+  lastTile: computedPromise "histories", ->
     @get "histories"
     .then (histories) ->
       get(histories, "firstObject")
     .then (history) ->
       get(history, "mentionedModel")
-    .then (tile) ->
-      get tile, "origin"
-
 
 `export default Model`

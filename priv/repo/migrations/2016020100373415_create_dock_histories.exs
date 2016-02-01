@@ -1,10 +1,9 @@
-defmodule Apiv4.Repo.Migrations.CreateAppointmentHistories do
+defmodule Apiv4.Repo.Migrations.CreateDockHistories do
   use Ecto.Migration
 
   def change do
-    create table(:appointment_histories) do
+    create table(:dock_histories) do
       add :recordable_id, :integer
-      add :permalink, :string
       add :type, :string
       add :name, :string
       add :message, :string

@@ -15,7 +15,12 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
     display: ["show", "index"]
     modify: ["new", "edit"]
   
-  batches: DS.hasMany "batch", async: true
+  inBatches: DS.hasMany "batch", 
+    inverse: "inAppointment"
+    async: true
+  outBatches: DS.hasMany "batch", 
+    inverse: "outAppointment"
+    async: true
   histories: DS.hasMany "history", async: true
   pictures: DS.hasMany "picture", async: true
   

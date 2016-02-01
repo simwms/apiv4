@@ -4,7 +4,6 @@ defmodule Apiv4.Repo.Migrations.CreateEmployeeHistories do
   def change do
     create table(:employee_histories) do
       add :recordable_id, :integer
-      add :permalink, :string
       add :type, :string
       add :name, :string
       add :message, :string

@@ -1,10 +1,9 @@
-defmodule Apiv4.Repo.Migrations.CreateCellHistories do
+defmodule Apiv4.Repo.Migrations.CreateBatchHistories do
   use Ecto.Migration
 
   def change do
-    create table(:cell_histories) do
+    create table(:batch_histories) do
       add :recordable_id, :integer
-      add :permalink, :string
       add :type, :string
       add :name, :string
       add :message, :string

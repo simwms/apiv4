@@ -24,11 +24,18 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     modify: ["edit"]
     async: true
 
-  appointment: DS.belongsTo "appointment",
+  outAppointment: DS.belongsTo "appointment",
+    label: "Pick Up Appointment"
+    description: "The appointment which will pick up this load from our warehouse"
+    display: ["show"]
+    async: true
+    inverse: "outBatches"
+  inAppointment: DS.belongsTo "appointment",
     label: "Drop Off Appointment"
     description: "The appointment which dropped this load off into our warehouse"
     display: ["show"]
     async: true
+    inverse: "inBatches"
     defaultValue: (router) -> router.modelFor "manager.appointment"
   histories: DS.hasMany "history", async: true
   

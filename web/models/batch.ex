@@ -9,7 +9,8 @@ defmodule Apiv4.Batch do
     field :description, :string
     belongs_to :cell, Apiv4.Cell
     belongs_to :account, Apiv4.Account
-    belongs_to :appointment, Apiv4.Appointment
+    belongs_to :in_appointment, Apiv4.Appointment
+    belongs_to :out_appointment, Apiv4.Appointment
     has_many :pictures, {"batch_pictures", Apiv4.Picture}, foreign_key: :imageable_id
     has_many :histories, {"batch_histories", Apiv4.History}, foreign_key: :recordable_id
     timestamps
@@ -17,7 +18,7 @@ defmodule Apiv4.Batch do
 
   @create_fields ~w(golive_at)
   @update_fields @create_fields
-  @optional_fields ~w(unlive_at deleted_at quantity description cell_id account_id appointment_id)
+  @optional_fields ~w(unlive_at deleted_at quantity description cell_id account_id in_appointment_id out_appointment_id)
 
   def create_changeset(model, params\\:empty) do
     model
