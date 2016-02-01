@@ -11,7 +11,7 @@ defmodule Apiv4.Appointment do
     belongs_to :account, Apiv4.Account
     belongs_to :employee, Apiv4.Employee
     has_one :weighticket, Apiv4.Weighticket
-
+    has_one :truck, Apiv4.Truck
     has_many :in_batches, Apiv4.Batch, foreign_key: :in_appointment_id
     has_many :out_batches, Apiv4.Batch, foreign_key: :out_appointment_id
     has_many :histories, {"appointment_histories", Apiv4.History}, foreign_key: :recordable_id

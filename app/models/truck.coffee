@@ -5,9 +5,10 @@
 `import Timestamps from 'apiv4/mixins/timestamps'`
 `import {Macros} from 'ember-cpm'`
 `import Ember from 'ember'`
+`import History from 'apiv4/utils/history'`
 {computedPromise} = Macros
 {get} = Ember
-DefaultTruckOrigin = -> x: 0, y: 0, a: 0
+
 Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   appointment: DS.belongsTo "appointment",
     label: "Appointment"
@@ -33,5 +34,13 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
       get(histories, "firstObject")
     .then (history) ->
       get(history, "mentionedModel")
+
+  didCreate: ->
+    @get "appointment"
+    .then (appointment) =>
+      rParams = History.truckEnterSite truck: @, appointment: appointment
+      RSVP.hash
+        truck: @relate("histories").associate(rParams.truck).save()
+        appointment: appointment.relate("histories").associate(rParams.appointment).save()
 
 `export default Model`

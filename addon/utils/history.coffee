@@ -1,49 +1,54 @@
 `import moment from 'moment'`
 `import _ from 'lodash/lodash'`
-{merge} = _
+{merge, mapValues} = _
 
+coreAp = (params, core) ->
+  mapValues params, (model) -> merge(core, identify(model))
+identify = (model) ->
+  mentionedType: model.constructor.modelName
+  mentionedId: model.id
+  type: "pair"
+  scheduledAt: moment()
+  happenedAt: moment()
 class History
-  identify = (model) ->
-    mentionedType: model.constructor.modelName
-    mentionedId: model.id
-    type: "pair"
+  @appointmentCreated = (appointment) ->
+    name: "appointment-created"
+    message: "appointment created"
+    mentionedId: appointment.id
+    mentionedType: "appointment"
+    type: "single"
     scheduledAt: moment()
     happenedAt: moment()
-
-  @truckEnterSite = ({truck, gate}) ->
-    core = 
+  @appointmentPickupBatch = (params) -> # {appointment, batch}
+    coreAp params,
+      name: "appointment-pickup-batch"
+      message: "Load scheduled to be picked up by appointment"
+  @appointmentDropoffBatch = (params) -> # {appointment, batch}
+    coreAp params,
+      name: "appointment-dropoff-batch"
+      message: "Load dropped off at warehouse by appointment"
+  @truckEnterSite = (params) -> # {truck, appointment}
+    coreAp params, 
       name: "truck-enter-site"
-      message: "truck arrived at entrance"
-    truck: merge core, identify(truck)
-    gate: merge core, identify(gate)
-  @truckExitSite = ({truck, gate}) ->
-    core = 
+      message: "truck arrived on site"
+  @truckExitSite = (params) -> # {truck, appointment}
+    coreAp params, 
       name: "truck-exit-site"
       message: "truck has left the site"
-    truck: merge core, identify(truck)
-    gate: merge core, identify(gate)
-  @truckEnterScale = ({truck, scale}) ->
-    core = 
+  @truckEnterScale = (params) -> # {truck, scale}
+    coreAp params, 
       name: "truck-enter-scale"
       message: "truck arrived at weight station"
-    truck: merge core, identify(truck)
-    scale: merge core, identify(scale)
-  @truckExitScale = ({truck, scale}) ->
-    core = 
+  @truckExitScale = (params) -> # {truck, scale}
+    coreAp params, 
       name: "truck-exit-scale"
       message: "truck has left weight station"
-    truck: merge core, identify(truck)
-    scale: merge core, identify(scale)
-  @truckEnterDock = ({truck, dock}) ->
-    core = 
+  @truckEnterDock = (params) -> # {truck, dock}
+    coreAp params, 
       name: "truck-enter-dock"
       message: "truck arrived at dock"
-    truck: merge core, identify(truck)
-    dock: merge core, identify(dock)
-  @truckExitDock = ({truck, dock}) ->
-    core = 
+  @truckExitDock = (params) -> # {truck, dock}
+    coreAp params, 
       name: "truck-exit-dock"
       message: "truck has departed from the dock"
-    truck: merge core, identify(truck)
-    dock: merge core, identify(dock)
 `export default History`

@@ -3,7 +3,7 @@
 `import Realtime from 'apiv4/mixins/realtime'`
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
-
+`import History from 'apiv4/utils/history'`
 Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,  
   description: DS.attr "string",
     description: "Extra notes regarding this appointment"
@@ -15,15 +15,6 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
     display: ["show", "index"]
     modify: ["new", "edit"]
   
-  inBatches: DS.hasMany "batch", 
-    inverse: "inAppointment"
-    async: true
-  outBatches: DS.hasMany "batch", 
-    inverse: "outAppointment"
-    async: true
-  histories: DS.hasMany "history", async: true
-  pictures: DS.hasMany "picture", async: true
-  
   company: DS.belongsTo "company",
     label: "Related Company"
     description: "The associated company with whom this appointment is for"
@@ -32,10 +23,23 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
     among: (_, store) -> store.findAll "company"
     proxyKey: "name"
     async: true
-  
+
+  inBatches: DS.hasMany "batch", 
+    inverse: "inAppointment"
+    async: true
+  outBatches: DS.hasMany "batch", 
+    inverse: "outAppointment"
+    async: true
+  histories: DS.hasMany "history", async: true
+  pictures: DS.hasMany "picture", async: true
+
   truck: DS.belongsTo "truck", async: true
   
   weighticket: DS.belongsTo "weighticket", async: true
   
-
+  didCreate: ->
+    @_super arguments...
+    @relate("histories")
+    .associate History.appointmentCreated @
+    .save()
 `export default Model`

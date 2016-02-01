@@ -3,6 +3,7 @@
 `import Realtime from 'apiv4/mixins/realtime'`
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
+`import History from 'apiv4/utils/history'`
 Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,  
   description: DS.attr "string",
     label: "Quality Description"
@@ -40,5 +41,14 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
   histories: DS.hasMany "history", async: true
   
   pictures: DS.hasMany "picture", async: true
+
+  didCreate: ->
+    @get "inAppointment"
+    .then (appointment) =>
+      rParams = History.appointmentDropoffBatch({appointment, batch: @})
+      RSPV.hash
+        batch: @relate("histories").associate(rParams.batch).save()
+        appointment: appointment.relate("histories").associate(rParams.appointment).save()
+
 
 `export default Model`
