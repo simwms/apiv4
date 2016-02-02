@@ -11,35 +11,29 @@ History = DS.Model.extend RelateableMixin, Timestamps,
   type: DS.attr 'string',
     label: "Event Type"
     description: "A macro that facilitates search and filtering of events"
-    display: ["show", "index"]
-    modify: ["new"]
   name: DS.attr 'string',
     label: "Event Name"
     description: "The name of this historical event"
-    display: ["show", "index"]
-    modify: ["new"]
+    display: ["index"]
   message: DS.attr 'string',
     label: "Event Summary"
     description: "A message visible to the user that explain to the user the significance of this event"
-    display: ["show"]
-    modify: ["new"]
+    display: ["index"]
   scheduledAt: DS.attr 'moment',
     label: "Evented Scheduled For"
     description: "The expected UTC time for when this event is planned to happen"
-    display: ["show"]
-    modify: ["new"]
+    display: ["index"]
   happenedAt: DS.attr 'moment',
     label: "Evented Happened At"
     description: "The actual UTC time when this event took place"
-    display: ["show"]
   mentionedType: DS.attr 'string',
     label: "Mentioned Type"
     description: "The factory name of model object which is related to this event"
-    display: ["show"]
+    display: ["index"]
   mentionedId: DS.attr 'string',
     label: "Mentioned id"
     description: "The id model object which is related to this event"
-    display: ["show"]
+    display: ["index"]
 
   mentionedModel: computedPromise "mentionedType", "mentionedId", ->
     type = @get "mentionedType"

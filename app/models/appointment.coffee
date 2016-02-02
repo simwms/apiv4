@@ -6,6 +6,7 @@
 `import History from 'apiv4/utils/history'`
 Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,  
   description: DS.attr "string",
+    label: "Material Description"
     description: "Extra notes regarding this appointment"
     modify: ["new", "edit"]
     display: ["show"]

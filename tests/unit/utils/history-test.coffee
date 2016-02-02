@@ -5,5 +5,5 @@ module 'Unit | Utility | history'
 
 # Replace this with your real tests.
 test 'it works', (assert) ->
-  assert.ok History?.truckDock
-  assert.ok History?.truckScale
+  assert.ok History?.truckEnterDock
+  assert.ok History?.truckEnterScale
