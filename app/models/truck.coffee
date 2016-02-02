@@ -13,7 +13,9 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   appointment: DS.belongsTo "appointment",
     label: "Appointment"
     description: "The appointment for which this truck is here to fulfill"
-    among: (router) -> router.modelFor("manager.appointments")
+    among: (router) -> router.modelFor("manager").appointments
+    defaultValue: (router) -> router.modelFor("manager.appointment")
+    modify: ["new"]
     async: true
   
   histories: DS.hasMany "history", async: true
