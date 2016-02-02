@@ -7,7 +7,7 @@
 `import Ember from 'ember'`
 `import History from 'apiv4/utils/history'`
 {computedPromise} = Macros
-{get} = Ember
+{get, RSVP} = Ember
 
 Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   appointment: DS.belongsTo "appointment",

@@ -4,6 +4,10 @@
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
 `import History from 'apiv4/utils/history'`
+`import Ember from 'ember'`
+
+{RSVP} = Ember
+
 Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,  
   description: DS.attr "string",
     label: "Quality Description"
@@ -46,7 +50,7 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     @get "inAppointment"
     .then (appointment) =>
       rParams = History.appointmentDropoffBatch({appointment, batch: @})
-      RSPV.hash
+      RSVP.hash
         batch: @relate("histories").associate(rParams.batch).save()
         appointment: appointment.relate("histories").associate(rParams.appointment).save()
 
