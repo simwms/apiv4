@@ -3,8 +3,9 @@
 `import Realtime from 'apiv4/mixins/realtime'`
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
+`import Historical from 'apiv4/mixins/historical'`
 `import History from 'apiv4/utils/history'`
-Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,  
+Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Historical,
   description: DS.attr "string",
     label: "Material Description"
     description: "Extra notes regarding this appointment"
@@ -31,11 +32,9 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime,
   outBatches: DS.hasMany "batch", 
     inverse: "outAppointment"
     async: true
-  histories: DS.hasMany "history", async: true
-  pictures: DS.hasMany "picture", async: true
 
+  pictures: DS.hasMany "picture", async: true
   truck: DS.belongsTo "truck", async: true
-  
   weighticket: DS.belongsTo "weighticket", async: true
   
   didCreate: ->

@@ -4,11 +4,12 @@
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
 `import History from 'apiv4/utils/history'`
+`import Historical from 'apiv4/mixins/historical'`
 `import Ember from 'ember'`
 
 {RSVP} = Ember
 
-Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,  
+Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Historical,
   description: DS.attr "string",
     label: "Quality Description"
     description: "Extra notes regarding this load"
@@ -42,8 +43,6 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     async: true
     inverse: "inBatches"
     defaultValue: (router) -> router.modelFor "manager.appointments.appointment"
-  histories: DS.hasMany "history", async: true
-  
   pictures: DS.hasMany "picture", async: true
 
   didCreate: ->
