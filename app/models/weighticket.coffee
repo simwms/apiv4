@@ -14,7 +14,7 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
     description: "Trucks are weighed upon exiting the warehouse"
     display: ["show"]
     modify: ["new", "edit"]
-  externalReference: DS.attr "string"
+  externalReference: DS.attr "string",
     label: "External Reference Number"
     description: "If you have an external weight-ticket tracking system, you can input its value here"
     display: ["show"]
