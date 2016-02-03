@@ -41,7 +41,7 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin,
     display: ["show"]
     async: true
     inverse: "inBatches"
-    defaultValue: (router) -> router.modelFor "manager.appointment"
+    defaultValue: (router) -> router.modelFor "manager.appointments.appointment"
   histories: DS.hasMany "history", async: true
   
   pictures: DS.hasMany "picture", async: true

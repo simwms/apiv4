@@ -7,14 +7,14 @@
 `import Ember from 'ember'`
 `import History from 'apiv4/utils/history'`
 {computedPromise} = Macros
-{get, RSVP} = Ember
+{get, RSVP, getWithDefault} = Ember
 
 Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   appointment: DS.belongsTo "appointment",
     label: "Appointment"
     description: "The appointment for which this truck is here to fulfill"
     among: (router) -> router.modelFor("manager").appointments
-    defaultValue: (router) -> router.modelFor("manager.appointment")
+    defaultValue: (router) -> router.modelFor("manager.appointments.appointment")
     modify: ["new"]
     async: true
   
@@ -27,15 +27,13 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   tileImage: "assets/image/truck.png"
   width: 0.5
   height: 0.5
-  origin: computedPromise "lastTile", ->
-    @get "lastTile"
-    ?.get "origin"
-  lastTile: computedPromise "histories", ->
+
+  latestHistory: computedPromise "histories.firstObject", ->
     @get "histories"
     .then (histories) ->
       get(histories, "firstObject")
-    .then (history) ->
-      get(history, "mentionedModel")
+  latestTile: computedPromise "latestHistory.mentionedModel", ->
+    getWithDefault(@, "latestHistory.mentionedModel", RSVP.resolve())
 
   didCreate: ->
     @get "appointment"
