@@ -1,4 +1,3 @@
-`import Ember from 'ember'`
 `import DS from 'ember-data'`
 `import moment from 'moment'`
 `import {RelateableMixin} from 'autox'`
@@ -7,9 +6,21 @@
 `import Historical from 'apiv4/mixins/historical'`
 `import History from 'apiv4/utils/history'`
 
-{get, RSVP, getWithDefault} = Ember
+Actions =
+  arriveOnsite: (appointment) ->
+    History.createWith "truckEnterSite", {appointment, truck: @}
+  departOnsite: (appointment) ->
+    History.createWith "truckExitSite", {appointment, truck: @}
+  arriveDock: (dock) ->
+    History.createWith "truckEnterDock", {dock, truck: @}
+  departDock: (dock) ->
+    History.createWith "truckExitDock", {dock, truck: @}
+  arriveScale: (scale) ->
+    History.createWith "truckEnterScale", {scale, truck: @}
+  departScale: (scale) ->
+    History.createWith "truckExitScale", {scale, truck: @}
 
-Model = DS.Model.extend Timestamps, RelateableMixin, Realtime, Historical,
+Model = DS.Model.extend Timestamps, RelateableMixin, Realtime, Historical, Actions,
   type: "tile"
   tileType: "truck"
   tileImage: "assets/image/truck.png"
@@ -29,9 +40,6 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime, Historical,
   didCreate: ->
     @get "appointment"
     .then (appointment) =>
-      rParams = History.truckEnterSite truck: @, appointment: appointment
-      RSVP.hash
-        truck: @relate("histories").associate(rParams.truck).save()
-        appointment: appointment.relate("histories").associate(rParams.appointment).save()
+      @arriveOnsite(appointment)
 
 `export default Model`

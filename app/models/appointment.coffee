@@ -39,7 +39,6 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Histori
   
   didCreate: ->
     @_super arguments...
-    @relate("histories")
-    .associate History.appointmentCreated @
-    .save()
+    History.createWith "appointmentCreated", appointment: @
+
 `export default Model`

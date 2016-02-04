@@ -48,10 +48,6 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Histori
   didCreate: ->
     @get "inAppointment"
     .then (appointment) =>
-      rParams = History.appointmentDropoffBatch({appointment, batch: @})
-      RSVP.hash
-        batch: @relate("histories").associate(rParams.batch).save()
-        appointment: appointment.relate("histories").associate(rParams.appointment).save()
-
+      History.createWith "appointmentDropoffBatch", {appointment, batch: @}
 
 `export default Model`

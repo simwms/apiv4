@@ -32,6 +32,7 @@ config :gateway, Stripex,
 config :plug, :mimes, %{"application/vnd.api+json" => ["json-api"]}
 config :autox, Autox.Defaults,
   host: "http://localhost:4200",
+  base: Apiv4,
   repo: Apiv4.Repo,
   simwms_master_key: "some-secret-key",
   error_view: Apiv4.ErrorView,
