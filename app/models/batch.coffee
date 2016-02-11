@@ -1,13 +1,13 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin, action} from 'autox'`
-`import Realtime from 'apiv4/mixins/realtime'`
-`import Paranoia from 'apiv4/mixins/paranoia'`
-`import Timestamps from 'apiv4/mixins/timestamps'`
+`import {RelateableMixin, action, computed} from 'autox'`
+`import Realtime from 'autox/mixins/realtime'`
+`import Paranoia from 'autox/mixins/paranoia'`
+`import Timestamps from 'autox/mixins/timestamps'`
 `import History from 'apiv4/utils/history'`
 `import Historical from 'autox/mixins/historical'`
 `import Ember from 'ember'`
 
-{RSVP} = Ember
+{computedPromise: sync} = computed
 
 Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Historical,
   pickupAppointment: action "click",

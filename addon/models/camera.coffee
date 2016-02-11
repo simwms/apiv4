@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
-`import Timestamps from '../mixins/timestamps'`
+`import Timestamps from 'autox/mixins/timestamps'`
 
 Camera = DS.Model.extend RelateableMixin, Timestamps,
   filmableId: DS.attr 'string',

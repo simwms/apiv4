@@ -1,17 +1,24 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
+`import {Mixins} from 'autox'`
+{Timestamps, Relateable, Historical} = Mixins
+Model = DS.Model.extend Timestamps, Relateable, Historical,  
+  confirmed: DS.attr "boolean",
+    label: "Employee Confirmed?"
+    description: "Confirmed employee accounts are properly connected to an user"
+    display: ["show"]
 
-`import Timestamps from 'apiv4/mixins/timestamps'`
-Model = DS.Model.extend Timestamps, RelateableMixin,
+  name: DS.attr "string",
+    label: "Employee Name"
+    description: "The name of the employee"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
   
-  confirmed: DS.attr "boolean"
+  role: DS.attr "string",
+    label: "Employee Job Role"
+    description: "The job the employee is assigned at this warehouse"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
 
-  name: DS.attr "string"
-  
-  role: DS.attr "string"
-
-  histories: DS.hasMany "history", async: true
-  
   pictures: DS.hasMany "picture", async: true
   
 

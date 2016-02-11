@@ -1,8 +1,8 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
-`import Realtime from 'apiv4/mixins/realtime'`
-`import Paranoia from 'apiv4/mixins/paranoia'`
-`import Timestamps from 'apiv4/mixins/timestamps'`
+`import Realtime from 'autox/mixins/realtime'`
+`import Paranoia from 'autox/mixins/paranoia'`
+`import Timestamps from 'autox/mixins/timestamps'`
 `import Historical from 'autox/mixins/historical'`
 `import History from 'apiv4/utils/history'`
 Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Historical,

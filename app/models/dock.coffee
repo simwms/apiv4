@@ -1,7 +1,7 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin, action, about} from 'autox'`
 `import TileCore from 'apiv4/mixins/tile-core'`
-`import Timestamps from 'apiv4/mixins/timestamps'`
+`import Timestamps from 'autox/mixins/timestamps'`
 `import Historical from 'autox/mixins/historical'`
 `import History from 'apiv4/utils/history'`
 `import {_computed} from 'autox/utils/xdash'`

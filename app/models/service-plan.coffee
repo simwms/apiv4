@@ -1,33 +1,62 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
+`import {Mixins} from 'autox'`
+{Timestamps, Relateable, Paranoia} = Mixins
+Model = DS.Model.extend Timestamps, Relateable, Paranoia,
+  name: DS.attr "string",
+    label: "Service Plan Name"
+    description: "The human readable name of this service / subscription plan"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
+  
+  amount: DS.attr "number",
+    label: "Monthly Subscription Cost"
+    description: "The pro-rated amount of money this plan costs in US cents"
+    modify: ["new", "edit"]
+  
+  cells: DS.attr "number",
+    label: "Storage Cell Avability"
+    description: "The number of storage cells available in this service plan"
+    display: ["show"]
+    modify: ["new", "edit"]
 
-`import Timestamps from 'apiv4/mixins/timestamps'`
-Model = DS.Model.extend Timestamps, RelateableMixin,
+  currency: DS.attr "string",
+    label: "Currency Code"
+    description: "The standard currency code of price"
   
-  amount: DS.attr "number"
+  description: DS.attr "string",
+    display: ["show"]
+    modify: ["new", "edit"]  
   
-  cells: DS.attr "number"
+  docks: DS.attr "number",
+    label: "Loading Dock Avability"
+    description: "The number of truck loading docks available in this service plan"
+    display: ["show"]
+    modify: ["new", "edit"]
   
-  currency: DS.attr "string"
-  
-  deletedAt: DS.attr "moment"
-  
-  description: DS.attr "string"
-  
-  docks: DS.attr "number"
-  
-  employees: DS.attr "number"
+  employees: DS.attr "number",
+    label: "Team Size"
+    description: "The number of user accounts available in this service plan"
+    display: ["show"]
+    modify: ["new", "edit"]
 
-  interval: DS.attr "string"
+  interval: DS.attr "string",
+    description: "Amount of time between subscription payments"
+    among: ["daily", "weekly", "monthly", "bimonthly", "yearly"]
   
-  intervalCount: DS.attr "number"
+  intervalCount: DS.attr "number",
+    description: "I don't remember what this is"
   
-  name: DS.attr "string"
+  presentation: DS.attr "string",
+    description: "I'm not sure what this is, probably a name field except better formed"
   
-  presentation: DS.attr "string"
+  scales: DS.attr "number",
+    label: "Weight Station Avability"
+    description: "The number of weight station scales available in this service plan"
+    display: ["show"]
+    modify: ["new", "edit"]
   
-  scales: DS.attr "number"
-  
-  stripePlanId: DS.attr "string"
+  stripePlanId: DS.attr "string",
+    label: "Stripe Plan Id"
+    description: "The name of this subscription plan as it appears on Stripe"
 
 `export default Model`

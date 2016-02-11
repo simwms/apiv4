@@ -1,8 +1,8 @@
 `import DS from 'ember-data'`
 `import moment from 'moment'`
 `import {RelateableMixin, action, _x} from 'autox'`
-`import Realtime from 'apiv4/mixins/realtime'`
-`import Timestamps from 'apiv4/mixins/timestamps'`
+`import Realtime from 'autox/mixins/realtime'`
+`import Timestamps from 'autox/mixins/timestamps'`
 `import Historical from 'autox/mixins/historical'`
 `import History from 'apiv4/utils/history'`
 

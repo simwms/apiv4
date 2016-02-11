@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin, virtual} from 'autox'`
-`import Timestamps from '../mixins/timestamps'`
+`import Timestamps from 'autox/mixins/timestamps'`
 `import Ember from 'ember'`
 {RSVP} = Ember
 History = DS.Model.extend RelateableMixin, Timestamps,

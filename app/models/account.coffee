@@ -1,7 +1,7 @@
 `import DS from 'ember-data'`
 `import {RelateableMixin} from 'autox'`
-`import Timestamps from 'apiv4/mixins/timestamps'`
-`import Paranoia from 'apiv4/mixins/paranoia'`
+`import Timestamps from 'autox/mixins/timestamps'`
+`import Paranoia from 'autox/mixins/paranoia'`
 Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
   name: DS.attr "string",
     label: "Name"
