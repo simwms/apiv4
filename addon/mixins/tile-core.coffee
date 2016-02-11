@@ -7,16 +7,19 @@
 TileCoreMixin = Ember.Mixin.create
   type: "tile"
   tileName: DS.attr "string",
+    priority: 50
     label: "Tile Name"
     description: "The specified name of the this tile"
     display: ["show"]
     modify: ["new", "edit"]
   status: DS.attr "string",
+    priority: 10
     label: "Status"
     description: "The realtime value of the physical status of this tile"
     display: ["show", "index"]
     modify: ["edit"]
   x: DS.attr "number", 
+    priority: 50
     defaultValue: 0
     label: "Grid X Position"
     description: "The horizontal coordinate of grid position from the top left corner"
@@ -24,6 +27,7 @@ TileCoreMixin = Ember.Mixin.create
     modify: ["new", "edit"]
   
   y: DS.attr "number", 
+    priority: 50
     defaultValue: 0
     label: "Grid Y Position"
     description: "The vertical coordinate of grid position from the top left corner"
@@ -31,11 +35,13 @@ TileCoreMixin = Ember.Mixin.create
     modify: ["new", "edit"]
 
   a: DS.attr "number",
+    priority: 50
     label: "Rotation angle"
     description: "the degree of rotation of a tile about its center"
     display: ["show"]
     modify: ["new", "edit"]
   z: DS.attr "number",
+    priority: 50
     label: "Z-Position"
     description: "The currently unsupported coordinate for height out of the screen"
   width: DS.attr "number", 

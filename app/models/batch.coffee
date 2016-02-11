@@ -1,15 +1,22 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
+`import {RelateableMixin, action} from 'autox'`
 `import Realtime from 'apiv4/mixins/realtime'`
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
 `import History from 'apiv4/utils/history'`
-`import Historical from 'apiv4/mixins/historical'`
+`import Historical from 'autox/mixins/historical'`
 `import Ember from 'ember'`
 
 {RSVP} = Ember
 
 Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Historical,
+  pickupAppointment: action "click",
+    label: "Mark for Pick Up"
+    description: "Mark this load to be picked up by the current appointment"
+    display: ["show"]
+    when: sync "fsm.prev", -> @fsm.wasA "appointment"
+    setup: ({fsm}) -> fsm.get "prev"
+    (appointment) -> History.createWith "appointmentPickupBatch", {appointment, batch: @}
   description: DS.attr "string",
     label: "Quality Description"
     description: "Extra notes regarding this load"

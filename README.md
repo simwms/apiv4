@@ -24,3 +24,17 @@ This README outlines the details of collaborating on this Ember addon.
 * `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+
+## Router.coffee
+If it were up to me, I'd write my router.coffee files like so:
+
+```coffeescript
+
+@namespace "whatever", ->
+  @collection "truck", ["new", "index"], ->
+    @model "truck", ["edit", "index"], ->
+      @collection "batch", ["new"]
+
+
+```

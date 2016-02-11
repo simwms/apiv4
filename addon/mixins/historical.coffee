@@ -5,11 +5,13 @@
 {get, RSVP, getWithDefault} = Ember
 HistoricalMixin = Ember.Mixin.create
   histories: DS.hasMany "history", async: true
-  latestHistory: computedPromise "histories.lastObject", ->
+  latestHistory: ->
     @get "histories"
     .then (histories) ->
       get(histories, "lastObject")
-  latestMentioned: computedPromise "latestHistory.mentionedModel", ->
-    getWithDefault(@, "latestHistory.mentionedModel", RSVP.resolve())
+  latestMentioned: ->
+    @latestHistory()
+    .then (history) ->
+      history?.mentionedModel()
 
 `export default HistoricalMixin`

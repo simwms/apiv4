@@ -3,7 +3,7 @@
 `import Realtime from 'apiv4/mixins/realtime'`
 `import Paranoia from 'apiv4/mixins/paranoia'`
 `import Timestamps from 'apiv4/mixins/timestamps'`
-`import Historical from 'apiv4/mixins/historical'`
+`import Historical from 'autox/mixins/historical'`
 `import History from 'apiv4/utils/history'`
 Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Historical,
   description: DS.attr "string",
