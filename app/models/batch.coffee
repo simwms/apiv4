@@ -1,22 +1,33 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin, action, computed} from 'autox'`
-`import Realtime from 'autox/mixins/realtime'`
-`import Paranoia from 'autox/mixins/paranoia'`
-`import Timestamps from 'autox/mixins/timestamps'`
+`import moment from 'moment'`
+`import Autox from 'autox'`
 `import History from 'apiv4/utils/history'`
-`import Historical from 'autox/mixins/historical'`
-`import Ember from 'ember'`
 
-{computedPromise: sync} = computed
+{createWith} = History
+{Mixins, action} = Autox
+{Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
 
-Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Historical,
+Model = DS.Model.extend Timestamps, Realtime, Paranoia, Relateable, Historical, Multiaction,
+  moveToCell: action "click",
+    label: "Move Load to Storage Cell"
+    description: "Mark that this batch has been moved to the selected storage cell"
+    display: ["show"]
+    ->
+      {cell} = yield from action.needs "cell"
+      @set "cell", cell
+      @save().then =>
+        createWith "batchMoveCell", {cell, batch: @}
+
   pickupAppointment: action "click",
     label: "Mark for Pick Up"
     description: "Mark this load to be picked up by the current appointment"
     display: ["show"]
-    when: sync "fsm.prev", -> @fsm.wasA "appointment"
-    setup: ({fsm}) -> fsm.get "prev"
-    (appointment) -> History.createWith "appointmentPickupBatch", {appointment, batch: @}
+    ->
+      {appointment} = yield from action.needs "appointment"
+      @set "outAppointment", appointment
+      @set "unliveAt", moment()
+      @save().then =>
+        createWith "appointmentPickupBatch", {appointment, batch: @}
   description: DS.attr "string",
     label: "Quality Description"
     description: "Extra notes regarding this load"
@@ -32,9 +43,7 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, RelateableMixin, Histori
   cell: DS.belongsTo "cell",
     label: "Storage Cell"
     description: "The on-site storage cell where this load will be stored"
-    among: (_, store) -> store.findAll "cell"
     display: ["show"]
-    modify: ["edit"]
     async: true
 
   outAppointment: DS.belongsTo "appointment",

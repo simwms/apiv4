@@ -1,20 +1,19 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin, action, about} from 'autox'`
+`import {Mixins, action, about, computed} from 'autox'`
 `import TileCore from 'apiv4/mixins/tile-core'`
-`import Timestamps from 'autox/mixins/timestamps'`
-`import Historical from 'autox/mixins/historical'`
 `import History from 'apiv4/utils/history'`
-`import {_computed} from 'autox/utils/xdash'`
-{computedPromise: sync} = _computed
+
+{computedTask: sync} = computed
+{Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
 Actions =
   arriveDock: action "click",
     priority: 2
     label: "Dock Truck"
     description: "Dock a truck at this current dock"
     display: ["show"]
-    when: sync "fsm.prev", -> @fsm.wasA "truck"
-    setup: ({fsm}) -> fsm.get("prev")
-    (truck) ->
+    when: History.latestWasnt("truck-enter-dock")
+    ->
+      {truck} = yield from action.needs "truck"
       History.createWith "truckEnterDock", {truck, dock: @}
 
   departDock: action "click",
@@ -22,13 +21,12 @@ Actions =
     label: "Send Away Truck"
     description: "After a truck has been loaded or unloaded, sends away the truck, and frees up this dock"
     display: ["show"]
-    when: sync "model.histories", -> 
-      @get("model")?.latestHistoryHas("name", "truck-enter-dock")
-    setup: -> @latestMentioned()
-    (truck) ->
-      History.createWith "truckExitDock", {truck, dock: @}
+    when: History.latestWas("truck-enter-dock")
+    ->
+      yield return @latestMentioned().then (truck) =>
+        History.createWith "truckExitDock", {truck, dock: @}
 
-Model = DS.Model.extend Timestamps, RelateableMixin, TileCore, Historical, Actions,
+Model = DS.Model.extend Timestamps, Relateable, TileCore, Historical, Actions, Multiaction,
   cameras: DS.hasMany "camera", async: true
 
 about Model,

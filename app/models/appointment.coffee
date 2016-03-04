@@ -1,11 +1,8 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
-`import Realtime from 'autox/mixins/realtime'`
-`import Paranoia from 'autox/mixins/paranoia'`
-`import Timestamps from 'autox/mixins/timestamps'`
-`import Historical from 'autox/mixins/historical'`
+`import {Mixins} from 'autox'`
 `import History from 'apiv4/utils/history'`
-Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Historical,
+{Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
+Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, Multiaction,
   description: DS.attr "string",
     label: "Material Description"
     description: "Extra notes regarding this appointment"
@@ -22,7 +19,7 @@ Model = DS.Model.extend Paranoia, Timestamps, RelateableMixin, Realtime, Histori
     description: "The associated company with whom this appointment is for"
     display: ["show", "index"]
     modify: ["new", "edit"]
-    among: (_, store) -> store.findAll "company"
+    among: -> @store.findAll "company"
     proxyKey: "name"
     async: true
 
