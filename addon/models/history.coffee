@@ -2,7 +2,7 @@
 `import {RelateableMixin, virtual} from 'autox'`
 `import Timestamps from 'autox/mixins/timestamps'`
 `import Ember from 'ember'`
-{RSVP} = Ember
+{RSVP, computed} = Ember
 History = DS.Model.extend RelateableMixin, Timestamps,
   recordableId: DS.attr "string",
     description: "The polymorphic id of an object that supports histories"
@@ -32,7 +32,8 @@ History = DS.Model.extend RelateableMixin, Timestamps,
     label: "Event Summary"
     description: "Just the quick gist of this history event"
     display: ["index"]
-    apply "message", "scheduledAt", (message, scheduledAt) ->
+    computed "message", "scheduledAt", ->
+      {message, scheduledAt} = @getProperties("message", "scheduledAt")
       "#{scheduledAt.format('lll')} - #{message}"
 
   mentionedModel: ->
