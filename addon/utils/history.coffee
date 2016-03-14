@@ -2,9 +2,9 @@
 `import moment from 'moment'`
 `import _ from 'lodash/lodash'`
 `import {createHistory, persistHistory} from 'autox/utils/create-history'`
-`import {Mixins, action, computed} from 'autox'`
-{isBlank} = Ember
-{computedTask} = computed
+`import {Mixins, action, _x} from 'autox'`
+{computed, isBlank} = Ember
+{computedTask} = _x.computed
 class History
   @latestWasnt = (something) ->
     computed "model.histories.firstObject", ->
