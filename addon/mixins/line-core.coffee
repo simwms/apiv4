@@ -43,6 +43,7 @@ LineCoreMixin = Ember.Mixin.create
 
   lineType: oneWay "constructor.modelName"
   type: alias "lineType"
+  ghostType: "2point"
 
   origin: computed "x", "y",
     get: ->

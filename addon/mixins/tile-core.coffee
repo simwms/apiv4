@@ -52,6 +52,7 @@ TileCoreMixin = Ember.Mixin.create
     defaultValue: 1
 
   tileType: oneWay "constructor.modelName"
+  ghostType: "tile"
 
   origin: computed "x", "y", "a",
     get: ->
