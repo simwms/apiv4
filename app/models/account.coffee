@@ -12,7 +12,6 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
   stripeSource: DS.attr "string",
     label: "Stripe Source"
     description: "A string of encrypted characters that represent customer credit card data via Stripe"
-    modify: ["edit"]
 
   stripeSubscriptionId: DS.attr "string",
     label: "Stripe Subscription Id"
@@ -23,5 +22,13 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
     description: "The timezone where this warehouse is located"
     modify: ["new", "edit"]
     display: ["show"]
+
+  servicePlan: DS.belongsTo "service-plan",
+    label: "Warehouse Service Plan"
+    description: "The subscription plan which describes what services are available in this warehouse account"
+    display: ["show"]
+    modify: ["upgrade"]
+    among: -> @store.findAll "service-plan"
+    async: true
 
 `export default Model`
