@@ -27,7 +27,7 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
     label: "Warehouse Service Plan"
     description: "The subscription plan which describes what services are available in this warehouse account"
     display: ["show"]
-    modify: ["upgrade"]
+    modify: ["model#upgrade"]
     among: -> @store.findAll "service-plan"
     async: true
 
