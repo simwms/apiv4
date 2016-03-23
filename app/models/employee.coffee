@@ -19,6 +19,12 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     display: ["show", "index"]
     modify: ["new", "edit"]
 
+  account: DS.belongsTo "account",
+    label: "Warehouse Account"
+    description: "The warehouse account where this employee works"
+    display: ["show"]
+    proxyKey: "name"
+
   pictures: DS.hasMany "picture", async: true
   
 
