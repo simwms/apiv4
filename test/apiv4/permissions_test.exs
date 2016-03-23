@@ -1,4 +1,5 @@
 defmodule Apiv4.PermissionsTest do
+  alias Autox.SessionUtils
   use Apiv4.ConnCase
   import Apiv4.Permissions
 
@@ -13,7 +14,7 @@ defmodule Apiv4.PermissionsTest do
     {:ok, conn: conn, user: user}
   end
   test "warehouse_employee?", %{conn: conn, user: user} do
-    refute conn |> warehouse_employee?
+    assert {:error, nil} == conn |> SessionUtils.current_session |> warehouse_employee?
     account = build_account(user)
     relationships = %{
       "account" => %{
@@ -23,9 +24,9 @@ defmodule Apiv4.PermissionsTest do
         }
       }
     }
-    conn
+    assert {:ok, _} = conn
     |> put("/api/sessions", %{"data" => %{"type" => "sessions", "relationships" => relationships}})
+    |> SessionUtils.current_session
     |> warehouse_employee?
-    |> assert
   end
 end

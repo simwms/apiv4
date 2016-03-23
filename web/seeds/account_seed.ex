@@ -31,9 +31,17 @@ defmodule Apiv4.AccountSeed do
     %{ "points" => "0,0 13,0", "x" => 1,  "y" => 10},
     %{ "points" => "0,0 0,7",  "x" => 1,  "y" => 3},
     %{ "points" => "0,0 13,0", "x" => 1,  "y" => 3}]
-  
-  def sow(params) do
+
+  @employee_seeds [
+    %{"role" => "admin", "name" => "admin", "confirmed" => true}
+  ]
+  def employee_seeds(%{user_id: user_id}) do
+    @employee_seeds 
+    |> Enum.map(&Map.put(&1, "user_id", user_id))
+  end
+  def sow(params, model) do
     params
+    |> Map.put("employees", employee_seeds(model))
     |> Map.put("docks",  @dock_seeds)
     |> Map.put("scales", @scale_seeds)
     |> Map.put("gates",  @gate_seeds)

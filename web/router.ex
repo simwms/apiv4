@@ -82,9 +82,13 @@ defmodule Apiv4.Router do
     the Desk, [:create, :delete]
     the Scale, [:create, :delete]
     the Employee, [:create, :delete]
-    an Account, [:delete, :update] do
+    an Account, [:update] do
       one ServicePlan, [:create, :delete]
     end
+  end
+  scope "/api", Apiv4 do
+    pipe_through [:api, :auth, :account, :management, :paranoia]
+    an Account, [:delete]
   end
 
   @moduledoc """
@@ -128,10 +132,16 @@ defmodule Apiv4.Router do
     pipe_through [:api, :auth]
     an Account, [:create, :show], do: one ServicePlan, [:show]
     an AccountDetail, [:show]
-    the User, [:show, :update] do
-      many [Account, Employee], [:index]
+    the User, [:update] do
+      many Employee, [:index]
     end
     can_logout!
+  end
+  scope "/api", Apiv4 do
+    pipe_through [:api, :auth, :paranoia]
+    the User, [:show] do
+      many Account, [:index]
+    end
   end
 
   @moduledoc """

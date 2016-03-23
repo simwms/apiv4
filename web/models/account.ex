@@ -34,9 +34,10 @@ defmodule Apiv4.Account do
   @optional_fields ~w()
 
   def create_changeset(model, params\\:empty) do
-    params = AccountSeed.sow(params)
+    params = AccountSeed.sow(params, model)
     model
     |> cast(params, @create_fields, @optional_fields)
+    |> cast_assoc(:employees, with: &Apiv4.Employee.create_changeset/2)
     |> cast_assoc(:walls, with: &Apiv4.Wall.create_changeset/2)
     |> cast_assoc(:roads, with: &Apiv4.Road.create_changeset/2)
     |> cast_assoc(:gates, with: &Apiv4.Gate.create_changeset/2)
@@ -54,6 +55,7 @@ defmodule Apiv4.Account do
 
   def delete_changeset(model, params\\%{}) do
     params = params |> Map.put_new("deleted_at", Ecto.DateTime.utc)
+
     model
     |> cast(params, @delete_fields, @optional_fields)
     |> cancel_stripe

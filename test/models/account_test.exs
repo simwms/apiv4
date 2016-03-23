@@ -10,7 +10,7 @@ defmodule Apiv4.AccountTest do
     |> case do
       {:ok, account} ->
         account = account 
-        |> Repo.preload([:walls, :roads, :desks, :gates, :docks, :cells, :scales, :user])
+        |> Repo.preload([:walls, :roads, :desks, :gates, :docks, :cells, :scales, :user, :employees])
         assert account.user
         assert Enum.count(account.walls) > 0
         assert Enum.count(account.roads) > 0
@@ -19,6 +19,10 @@ defmodule Apiv4.AccountTest do
         assert Enum.count(account.docks) > 0
         assert Enum.count(account.cells) > 0
         assert Enum.count(account.scales) > 0
+        assert Enum.count(account.employees) > 0
+        assert [employee] = account.employees
+        assert employee.user_id == account.user.id
+
       {:error, changeset} ->
         refute changeset
     end
