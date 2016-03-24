@@ -39,7 +39,7 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     when: equal "model.role", "worker"
     -> 
       @set "role", "admin"
-      @save()
+      yield return @save()
 
   demoteToWorker: action "click",
     label: "Demote to Warehouse Worker"
@@ -48,6 +48,6 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     when: equal "model.role", "admin"
     ->
       @set "role", "worker"
-      @save()
+      yield return @save()
 
 `export default Model`
