@@ -33,7 +33,7 @@ defmodule Apiv4.AccountSeed do
     %{ "points" => "0,0 13,0", "x" => 1,  "y" => 3}]
 
   @employee_seeds [
-    %{"role" => "admin", "name" => "admin", "confirmed" => true}
+    %{"role" => "superadmin", "name" => "admin", "confirmed" => true}
   ]
   def employee_seeds(%{user_id: user_id}) do
     @employee_seeds 

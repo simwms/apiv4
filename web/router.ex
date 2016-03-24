@@ -132,7 +132,9 @@ defmodule Apiv4.Router do
     pipe_through [:api, :auth]
     an Account, [:create, :show], do: one ServicePlan, [:show]
     an AccountDetail, [:show]
-    the User, [:update]
+    the User, [:update] do
+      many Employee, [:index]
+    end
     can_logout!
   end
   scope "/api", Apiv4 do
@@ -141,7 +143,7 @@ defmodule Apiv4.Router do
       many [Account], [:index]
     end
     the User, [:show] do
-      many [Account, Employee], [:index]
+      many [Account], [:index]
     end
   end
 

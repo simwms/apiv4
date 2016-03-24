@@ -1,5 +1,8 @@
+`import Ember from 'ember'`
 `import DS from 'ember-data'`
-`import {Mixins} from 'autox'`
+`import Autox from 'autox'`
+{computed: {equal}} = Ember
+{Mixins, action} = Autox
 {Timestamps, Relateable, Historical} = Mixins
 Model = DS.Model.extend Timestamps, Relateable, Historical,  
   confirmed: DS.attr "boolean",
@@ -17,7 +20,9 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     label: "Employee Job Role"
     description: "The job the employee is assigned at this warehouse"
     display: ["show", "index"]
-    modify: ["new", "edit"]
+    modify: ["new"]
+    defaultValue: "worker"
+    among: ["worker", "admin"]
 
   account: DS.belongsTo "account",
     label: "Warehouse Account"
@@ -26,6 +31,23 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     proxyKey: "name"
 
   pictures: DS.hasMany "picture", async: true
-  
+
+  promoteToAdmin: action "click",
+    label: "Promote to Warehouse Admin"
+    description: "Enable this employee to access the warehouse admin panel"
+    display: ["show"]
+    when: equal "model.role", "worker"
+    -> 
+      @set "role", "admin"
+      @save()
+
+  demoteToWorker: action "click",
+    label: "Demote to Warehouse Worker"
+    description: "Revoke warehouse admin panel access from this employee account"
+    display: ["show"]
+    when: equal "model.role", "admin"
+    ->
+      @set "role", "worker"
+      @save()
 
 `export default Model`
