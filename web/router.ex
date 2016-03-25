@@ -133,7 +133,7 @@ defmodule Apiv4.Router do
     an Account, [:create, :show], do: one ServicePlan, [:show]
     an AccountDetail, [:show]
     the User, [:update] do
-      many Employee, [:index]
+      many [Employee, UnconfirmedEmployee], [:index]
     end
     can_logout!
   end

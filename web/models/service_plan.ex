@@ -12,6 +12,11 @@ defmodule Apiv4.ServicePlan do
     field :employees, :integer
     field :cells, :integer
     field :scales, :integer
+    field :storage, :integer
+    field :dataflow, :integer
+    field :daily_uptime, :integer
+    field :custom_domain, :boolean, default: false
+    field :data_backup, :boolean, default: false
     field :description, :string
     field :presentation, :string
     

@@ -4,6 +4,7 @@ defmodule Apiv4.Repo.Migrations.CreateEmployees do
   def change do
     create table(:employees) do
       add :name, :string
+      add :email, :string
       add :role, :string
       add :confirmed, :boolean, default: false
 

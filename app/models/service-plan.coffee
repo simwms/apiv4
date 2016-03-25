@@ -54,7 +54,37 @@ Model = DS.Model.extend Timestamps, Relateable, Paranoia,
     description: "The number of weight station scales available in this service plan"
     display: ["show"]
     modify: ["new", "edit"]
-  
+
+  storage: DS.attr "number",
+    label: "Data Storage"
+    description: "The amount of data (in megabytes) stored on our cloud servers"
+    display: ["show"]
+    modify: ["new", "edit"]
+
+  dataflow: DS.attr "number",
+    label: "Data Transfer"
+    description: "The maximum amount of data (in megabytes) uploaded and downloaded allowed per month"
+    display: ["show"]
+    modify: ["new", "edit"]
+
+  dailyUptime: DS.attr "number",
+    label: "Daily Operation Hours"
+    description: "The number of hours per day the cloud warehouse server is open to access"
+    display: ["show"]
+    modify: ["new", "edit"]
+
+  customDomain: DS.attr "boolean",
+    label: "Customizeable Domain Name"
+    description: "Whether or not this warehouse management software can be delivered via your company's domain name"
+    display: ["show"]
+    modify: ["new", "edit"]
+
+  dataBackup: DS.attr "number",
+    label: "Private Data Backup Eligiblity"
+    description: "Whether or not your warehouse application data can be privately backed up"
+    display: ["show"]
+    modify: ["new", "edit"]
+
   stripePlanId: DS.attr "string",
     label: "Stripe Plan Id"
     description: "The name of this subscription plan as it appears on Stripe"

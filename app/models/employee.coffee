@@ -30,6 +30,16 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     display: ["show"]
     proxyKey: "name"
 
+  user: DS.belongsTo "user",
+    label: "User Account"
+    description: "The user account associate with this warehouse employee"
+    async: true
+
+  unconfirmedUser: DS.belongsTo "user",
+    label: "Unconfirmed User Account"
+    description: "The possibly nonexistent user for which this warehouse employee object would be associated with once that account is confirmed"
+    async: true
+
   pictures: DS.hasMany "picture", async: true
 
   promoteToAdmin: action "click",

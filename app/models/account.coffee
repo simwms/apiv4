@@ -30,5 +30,6 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
     modify: ["model#upgrade"]
     among: -> @store.findAll "service-plan"
     async: true
+    proxyKey: "name"
 
 `export default Model`

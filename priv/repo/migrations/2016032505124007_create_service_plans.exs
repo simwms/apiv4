@@ -13,6 +13,11 @@ defmodule Apiv4.Repo.Migrations.CreateServicePlans do
       add :employees, :integer
       add :cells, :integer
       add :scales, :integer
+      add :storage, :integer
+      add :dataflow, :integer
+      add :daily_uptime, :integer
+      add :custom_domain, :boolean, default: false
+      add :data_backup, :boolean, default: false
       add :description, :string
       add :presentation, :string
       add :deleted_at, :datetime
