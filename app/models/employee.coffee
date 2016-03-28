@@ -10,6 +10,12 @@ Model = DS.Model.extend Timestamps, Relateable, Historical,
     description: "Confirmed employee accounts are properly connected to an user"
     display: ["show"]
 
+  email: DS.attr "string",
+    label: "Employee Email"
+    description: "The email address of the employee you wish to invite to access your warehouse account"
+    display: ["show", "index"]
+    modify: ["new", "edit"]
+
   name: DS.attr "string",
     label: "Employee Name"
     description: "The name of the employee"
