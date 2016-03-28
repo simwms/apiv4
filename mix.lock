@@ -1,4 +1,5 @@
-%{"certifi": {:hex, :certifi, "0.4.0"},
+%{"autox": {:git, "https://github.com/foxnewsnetwork/autox.git", "83814bf03de650e16924e3badd6e41f8ef76c189", []},
+  "certifi": {:hex, :certifi, "0.4.0"},
   "combine": {:hex, :combine, "0.7.0"},
   "comeonin": {:hex, :comeonin, "2.2.0"},
   "connection": {:hex, :connection, "1.0.2"},
