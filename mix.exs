@@ -43,7 +43,7 @@ defmodule Apiv4.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.1"},
-     {:autox, "~> 0.1.48", github: "foxnewsnetwork/autox"},
+     {:autox, "~> 0.1.49", github: "foxnewsnetwork/autox"},
      {:fox, "~> 0.1"},
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, "~> 0.11.0"},
