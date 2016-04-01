@@ -1,5 +1,5 @@
 <button class="btn btn-default {{if isBusy "disabled"}}" {{action "createNewCompany"}}>
-  {{if isBusy}}
+  {{#if isBusy}}
     {{fa-icon "cog" spin=true fixedWidth=true}} Busy...
   {{else}}
     {{fa-icon "plus" fixedWidth=true}} New Company
