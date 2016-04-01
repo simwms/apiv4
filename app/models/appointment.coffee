@@ -2,6 +2,13 @@
 `import {Mixins} from 'autox'`
 `import History from 'apiv4/utils/history'`
 `import Query from 'autox/utils/query'`
+makeQuery = (name) ->
+  new Query()
+  .filterBy("name", "i~", name)
+  .orderBy("name")
+  .pageBy 
+    limit: 25
+    offset: 0
 {Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
 Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, Multiaction,
   description: DS.attr "string",
@@ -21,11 +28,7 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
     display: ["show", "index"]
     modify: ["new", "edit"]
     search: (name) -> 
-      q = new Query
-      .filterBy "name", "i~", name
-      .orderBy "name"
-      .pageBy limit: 25, offset: 0
-      @store.query "company", q.toParams()
+      @store.query "company", makeQuery(name).toParams()
     among: -> @store.findAll "company"
     accessor: "appointment-company-field"
     proxyKey: "name"
