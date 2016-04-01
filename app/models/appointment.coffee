@@ -30,7 +30,7 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
     search: (name) -> 
       @store.query "company", makeQuery(name).toParams()
     among: -> @store.findAll "company"
-    # accessor: "appointment-company-field"
+    accessor: "appointment-company-field"
     proxyKey: "name"
     async: true
 
