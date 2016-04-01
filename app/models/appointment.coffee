@@ -27,7 +27,7 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
       .pageBy limit: 25, offset: 0
       @store.query "company", q.toParams()
     among: -> @store.findAll "company"
-    accessor: "apiv4-appointment-company-field"
+    accessor: "appointment-company-field"
     proxyKey: "name"
     async: true
 
