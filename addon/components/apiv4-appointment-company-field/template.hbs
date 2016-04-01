@@ -1,0 +1,19 @@
+<button class="btn btn-default {{if isBusy "disabled"}}" {{action "createNewCompany"}}>
+  {{if isBusy}}
+    {{fa-icon "cog" spin=true fixedWidth=true}} Busy...
+  {{else}}
+    {{fa-icon "plus" fixedWidth=true}} New Company
+  {{/if}}
+</button>
+{{#em-select-field formHeart
+  name=field.accessName
+  label=field.label
+  options=field.choices
+  search=(if field.search (perform field.searchTask))
+  searchField=field.proxyKey
+  onkeydown=(action (mut currentSearchTerm))
+  prefix="fa-institution"
+  disabled=(not field.canModify) 
+  as |choice|}}
+  {{autox-select-choice model=choice field=field}}
+{{/em-select-field}}
