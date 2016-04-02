@@ -5,7 +5,7 @@
 
 {Relateable, Realtime, Timestamps, Historical, Multiaction} = Mixins
 Actions =
-  arriveDock: action "click",
+  arriveScale: action "click",
     priority: 0
     label: "Truck Arrive at Scale"
     description: "Mark that a truck has arrived at this weight station scale"
@@ -14,7 +14,7 @@ Actions =
       {truck} = yield from action.needs "truck"
       History.createWith "truckEnterScale", {truck, scale: @}
 
-  departDock: action "click",
+  departScale: action "click",
     priority: 0
     label: "Send Away Truck"
     description: "After the current truck has complete its weighing, mark that the truck has left"

@@ -22,10 +22,14 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
     display: ["show", "index"]
     modify: ["new", "edit"]
   
+  companyName: DS.attr "string",
+    label: "Related Company Name"
+    description: "The company associated with this appointment"
+    display: ["show", "index"]
+
   company: DS.belongsTo "company",
     label: "Related Company"
     description: "The associated company with whom this appointment is for"
-    display: ["show", "index"]
     modify: ["new", "edit"]
     search: (name) -> 
       @store.query "company", makeQuery(name).toParams()

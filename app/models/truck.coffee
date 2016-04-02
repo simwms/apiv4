@@ -16,8 +16,8 @@ Actions =
     when: computedTask "model.histories.length", ->
       @get("model.histories").then Ember.isEmpty
     ->
-      {appointment} = yield from action.needs "appointment"
-      History.persistWith "truckEnterSite", {appointment, truck: @}
+      yield return @get("appointment").then (appointment) =>
+        History.persistWith "truckEnterSite", {appointment, truck: @}
   departOnsite: action "click",
     label: "Mark Truck Departed"
     description: "Inform the warehouse that this truck has completed its business and has physically departed"

@@ -32,7 +32,6 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Realtime,
   appointment: DS.belongsTo "appointment",
     label: "Related Appointment"
     description: "The appointment for which this weight ticket is related to"
-    defaultValue: (router) -> router.modelFor "manager.appointments.appointment"
     async: true
     display: ["show", "index"]
 

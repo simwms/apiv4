@@ -11,9 +11,9 @@ defmodule Apiv4.Truck do
     timestamps
   end
 
-  @create_fields ~w(golive_at account_id appointment_id)
+  @create_fields ~w(golive_at account_id)
   @update_fields @create_fields
-  @optional_fields ~w(unlive_at)
+  @optional_fields ~w(unlive_at appointment_id)
 
   def create_changeset(model, params\\:empty) do
     model

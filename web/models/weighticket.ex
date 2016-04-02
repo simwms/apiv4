@@ -16,9 +16,9 @@ defmodule Apiv4.Weighticket do
     timestamps
   end
 
-  @create_fields ~w(account_id appointment_id golive_at)
+  @create_fields ~w(account_id golive_at)
   @update_fields @create_fields
-  @optional_fields ~w(arrive_pounds depart_pounds license_plate notes external_reference unlive_at)
+  @optional_fields ~w(arrive_pounds depart_pounds license_plate notes external_reference unlive_at appointment_id)
 
   def create_changeset(model, params\\:empty) do
     model

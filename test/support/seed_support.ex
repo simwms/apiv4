@@ -3,6 +3,7 @@ defmodule Apiv4.SeedSupport do
   alias Apiv4.User
   alias Apiv4.ServicePlan
   alias Apiv4.Account
+  alias Apiv4.Company
   import Ecto.Model
   import Ecto.Query, only: [from: 2]
   def service_plan_params do
@@ -17,6 +18,10 @@ defmodule Apiv4.SeedSupport do
     %{"name" => "apiv4-test-warehouse", "timezone" => "America/Los_Angeles"}
   end
 
+  def company_params do
+    %{"name" => "apiv4-test-company"}
+  end
+
   def build_user do
     User
     |> struct
@@ -28,6 +33,13 @@ defmodule Apiv4.SeedSupport do
     user
     |> build(:accounts)
     |> Account.create_changeset(account_params)
+    |> Repo.insert!
+  end
+
+  def build_company(account\\build_account) do
+    account
+    |> build(:companies)
+    |> Company.create_changeset(company_params)
     |> Repo.insert!
   end
 
