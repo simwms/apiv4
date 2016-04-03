@@ -7,6 +7,8 @@ defmodule Apiv4.Batch do
     field :deleted_at, Ecto.DateTime
     field :quantity, :string
     field :description, :string
+    field :quantity_number, :decimal
+    field :quantity_units, :string
     belongs_to :cell, Apiv4.Cell
     belongs_to :account, Apiv4.Account
     belongs_to :in_appointment, Apiv4.Appointment
@@ -18,7 +20,7 @@ defmodule Apiv4.Batch do
 
   @create_fields ~w(golive_at)
   @update_fields @create_fields
-  @optional_fields ~w(unlive_at deleted_at quantity description cell_id account_id in_appointment_id out_appointment_id)
+  @optional_fields ~w(unlive_at deleted_at quantity quantity_number quantity_units description cell_id account_id in_appointment_id out_appointment_id)
 
   def create_changeset(model, params\\:empty) do
     model

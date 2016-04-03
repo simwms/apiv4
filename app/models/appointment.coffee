@@ -11,6 +11,28 @@ makeQuery = (name) ->
     offset: 0
 {Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
 Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, Multiaction,
+  priceNumber: DS.attr "number",
+    step: 0.000001
+    label: "Price per Unit"
+    description: "The agreed unit price value of this appointment for your reference"
+    modify: ["new", "edit"]
+    display: ["show"]
+  priceUnits: DS.attr "number",
+    label: "Units of Price"
+    description: "The agreed units of price, for example: \"cents / pound\", \"dollars / metric ton\""
+    modify: ["new", "edit"]
+    display: ["show"]
+  priceNotes: DS.attr "string",
+    label: "Additional Price Notes"
+    description: "Any additional references you'd like to comment about the price"
+    modify: ["new", "edit"]
+    display: ["show"]
+  quantityNumber: DS.attr "number",
+    step: 0.000001
+    label: "Quantity Value"
+    description: "The expected numeric quantity of this appointment in units of the denominator of price"
+    modify: ["new", "edit"]
+    display: ["show"]
   description: DS.attr "string",
     label: "Material Description"
     description: "Extra notes regarding this appointment"

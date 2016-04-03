@@ -34,9 +34,19 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, Relateable, Historical, 
     modify: ["new", "edit"]
     display: ["show"]
 
+  quantityUnits: DS.attr "string",
+    label: "Units of this Load"
+    description: "For example, 'pounds', 'boxes', or 'kilograms'"
+    modify: ["new", "edit"]
+    display: ["show"]
+  quantityNumber: DS.attr "number",
+    label: "Quantity Value"
+    description: "The numeric value of this load batch"
+    modify: ["new", "edit"]
+    display: ["show"]
   quantity: DS.attr "string",
-    label: "Quantity"
-    description: "The amount of stuff inside this load"
+    label: "Quantity Description"
+    description: "The qualitative description of quantity of this load"
     modify: ["new", "edit"]
     display: ["show"]
   

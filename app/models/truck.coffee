@@ -14,7 +14,10 @@ Actions =
     description: "Inform the warehouse that this truck has just arrived on-site"
     display: ["show"]
     when: computedTask "model.histories.length", ->
-      @get("model.histories").then Ember.isEmpty
+      @get("model")
+      ?.get("histories")
+      ?.then (histories) -> 
+        Ember.isEmpty histories
     ->
       yield return @get("appointment").then (appointment) =>
         History.createWith "truckEnterSite", {appointment, truck: @}
@@ -73,11 +76,22 @@ Model = DS.Model.extend Timestamps, Relateable, Realtime, Historical, Multiactio
     display: ["show", "index"]
     async: true
 
-  pictures: DS.hasMany "picture", async: true
+  companyName: DS.attr "string",
+    label: "Related Company Name"
+    description: "The company who is providing this truck's transportation services"
+    display: ["show", "index"]
 
-  didCreate: ->
-    @get "appointment"
-    .then (appointment) =>
-      @arriveOnsite(appointment)
+  company: DS.belongsTo "company",
+    label: "Related Company"
+    description: "The company who is providing this truck's transportation services"
+    modify: ["new", "edit"]
+    search: (name) -> 
+      @store.query "company", makeQuery(name).toParams()
+    among: -> @store.findAll "company"
+    accessor: "truck-company-field"
+    proxyKey: "name"
+    async: true
+
+  pictures: DS.hasMany "picture", async: true
 
 `export default Model`

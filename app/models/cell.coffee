@@ -1,10 +1,9 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
+`import {Mixins} from 'autox'`
 `import TileCore from 'apiv4/mixins/tile-core'`
-`import Timestamps from 'autox/mixins/timestamps'`
-`import Historical from 'autox/mixins/historical'`
 
-Model = DS.Model.extend Timestamps, RelateableMixin, TileCore, Historical,
+{Relateable, Timestamps, Historical, Multiaction} = Mixins
+Model = DS.Model.extend Timestamps, Relateable, TileCore, Historical, Multiaction,
   cameras: DS.hasMany "camera", async: true
   batches: DS.hasMany "batches", async: true
 
