@@ -7,7 +7,7 @@
 {computedTask} = _x.computed
 class History
   @latestWasnt = (something) ->
-    computed "model.histories.firstObject", ->
+    computedTask "model.histories.firstObject", ->
       @get("model").latestHistoryHas("name", something)
       .then (x) -> not x
   @latestWas = (something) ->
