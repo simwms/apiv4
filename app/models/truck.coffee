@@ -17,7 +17,7 @@ Actions =
       @get("model.histories").then Ember.isEmpty
     ->
       yield return @get("appointment").then (appointment) =>
-        History.persistWith "truckEnterSite", {appointment, truck: @}
+        History.createWith "truckEnterSite", {appointment, truck: @}
   departOnsite: action "click",
     label: "Mark Truck Departed"
     description: "Inform the warehouse that this truck has completed its business and has physically departed"
@@ -25,7 +25,7 @@ Actions =
     when: History.latestWas OnsiteNames
     ->
       yield return @get("appointment").then (appointment) =>
-        History.persistWith "truckExitSite", {appointment, truck: @}
+        History.createWith "truckExitSite", {appointment, truck: @}
   arriveDock: action "click",
     label: "Truck Arrive at Dock"
     description: "Tell the system that this truck has physically arrived at this dock"
@@ -33,7 +33,7 @@ Actions =
     when: History.latestWas OnsiteNames
     -> 
       {dock} = yield from action.needs "dock"
-      History.persistWith "truckEnterDock", {dock, truck: @}
+      History.createWith "truckEnterDock", {dock, truck: @}
   departDock: action "click",
     label: "Truck Leaves Dock"
     description: "Inform the system that this truck has physically departed from this dock"
@@ -41,7 +41,7 @@ Actions =
     when: History.latestWas "truck-enter-dock"
     ->
       yield return @latestMentioned().then (dock) =>
-        History.persistWith "truckExitDock", {dock, truck: @}
+        History.createWith "truckExitDock", {dock, truck: @}
   arriveScale: action "click",
     label: "Truck Arrive at Scale"
     description: "Tell the system that this truck has physically arrived at this weight station"
@@ -49,7 +49,7 @@ Actions =
     when: History.latestWas OnsiteNames
     ->
       {scale} = yield from action.needs "scale"
-      History.persistWith "truckEnterScale", {scale, truck: @}
+      History.createWith "truckEnterScale", {scale, truck: @}
   departScale: action "click",
     label: "Truck Leaves Scales"
     description: "Inform the system that this truck has physically departed from the weight station"
@@ -57,7 +57,7 @@ Actions =
     when: History.latestWas "truck-enter-scale"
     ->
       yield return @latestMentioned().then (scale) =>
-        History.persistWith "truckExitScale", {scale, truck: @}
+        History.createWith "truckExitScale", {scale, truck: @}
 
 Model = DS.Model.extend Timestamps, Relateable, Realtime, Historical, Multiaction, Actions,
   type: "tile"
