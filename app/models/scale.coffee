@@ -1,12 +1,12 @@
 `import DS from 'ember-data'`
-`import {Mixins, action} from 'autox'`
+`import {Mixins, action, Importance} from 'autox'`
 `import TileCore from 'apiv4/mixins/tile-core'`
 `import History from 'apiv4/utils/history'`
 
 {Relateable, Realtime, Timestamps, Historical, Multiaction} = Mixins
 Actions =
   arriveScale: action "click",
-    priority: 0
+    priority: Importance.MissionCritical
     label: "Truck Arrive at Scale"
     description: "Mark that a truck has arrived at this weight station scale"
     display: ["show"]
@@ -15,7 +15,7 @@ Actions =
       History.createWith "truckEnterScale", {truck, scale: @}
 
   departScale: action "click",
-    priority: 0
+    priority: Importance.MissionCritical
     label: "Send Away Truck"
     description: "After the current truck has complete its weighing, mark that the truck has left"
     display: ["show"]

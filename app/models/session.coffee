@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 `import Ember from 'ember'`
-`import {SessionStateMixin} from 'autox'`
+`import {SessionStateMixin, Importance} from 'autox'`
 
 Session = DS.Model.extend Ember.Evented, SessionStateMixin,
   
@@ -9,13 +9,13 @@ Session = DS.Model.extend Ember.Evented, SessionStateMixin,
     description: "The username identifer used by our system to both send the user email as well as to sign the user in"
     display: ["show"]
     modify: ["new"]
-    priority: 0
+    priority: Importance.VeryImportant
   
   password: DS.attr "string",
     label: "Password"
     description: "The plain-text password associated with this account, used only in account creation"
     modify: ["new"]
-    priority: 1
+    priority: Importance.Important
   
   rememberMe: DS.attr "boolean",
     label: "Remeber Me?"

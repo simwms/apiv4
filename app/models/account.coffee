@@ -1,11 +1,12 @@
 `import DS from 'ember-data'`
-`import {RelateableMixin} from 'autox'`
-`import Timestamps from 'autox/mixins/timestamps'`
-`import Paranoia from 'autox/mixins/paranoia'`
-Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
+`import {Mixins, Importance} from 'autox'`
+
+{Relateable, Timestamps, Paranoia} = Mixins
+Model = DS.Model.extend Timestamps, Relateable, Paranoia,
   name: DS.attr "string",
     label: "Name"
     description: "The good and rememberable user-defined name that defines this object"
+    priority: Importance.VeryImportant
     display: ["show", "index"]
     modify: ["edit", "new"]
   
@@ -20,12 +21,14 @@ Model = DS.Model.extend Timestamps, RelateableMixin, Paranoia,
   timezone: DS.attr "string",
     label: "Warehouse Timezone"
     description: "The timezone where this warehouse is located"
+    priority: Importance.Important
     modify: ["new", "edit"]
     display: ["show"]
 
   servicePlan: DS.belongsTo "service-plan",
     label: "Warehouse Service Plan"
     description: "The subscription plan which describes what services are available in this warehouse account"
+    priority: Importance.Important
     display: ["show"]
     modify: ["model#upgrade"]
     among: -> @store.findAll "service-plan"

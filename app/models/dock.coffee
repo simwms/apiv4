@@ -1,5 +1,5 @@
 `import DS from 'ember-data'`
-`import {Mixins, action, about, computed} from 'autox'`
+`import {Mixins, action, about, computed, Importance} from 'autox'`
 `import TileCore from 'apiv4/mixins/tile-core'`
 `import History from 'apiv4/utils/history'`
 
@@ -7,7 +7,7 @@
 {Relateable, Realtime, Timestamps, Historical, Multiaction, Paranoia} = Mixins
 Actions =
   arriveDock: action "click",
-    priority: 2
+    priority: Importance.MissionCritical
     label: "Dock Truck"
     description: "Dock a truck at this current dock"
     display: ["show"]
@@ -17,7 +17,7 @@ Actions =
       History.createWith "truckEnterDock", {truck, dock: @}
 
   departDock: action "click",
-    priority: 2
+    priority: Importance.MissionCritical
     label: "Send Away Truck"
     description: "After a truck has been loaded or unloaded, sends away the truck, and frees up this dock"
     display: ["show"]
