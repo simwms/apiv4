@@ -17,7 +17,7 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
     description: "The agreed unit price value of this appointment for your reference"
     modify: ["new", "edit"]
     display: ["show"]
-  priceUnits: DS.attr "number",
+  priceUnits: DS.attr "string",
     label: "Units of Price"
     description: "The agreed units of price, for example: \"cents / pound\", \"dollars / metric ton\""
     modify: ["new", "edit"]
