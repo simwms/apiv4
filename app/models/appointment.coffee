@@ -87,16 +87,34 @@ Model = DS.Model.extend Paranoia, Timestamps, Relateable, Realtime, Historical, 
       @batch.save().then =>
         createWith "appointmentPickupBatch", {appointment, batch: @}
 
-  inBatches: DS.hasMany "batch", 
+  inBatches: DS.hasMany "batch",
+    label: "Imported Loads"
+    description: "The batch loads that were brought into this warehouse by this appointment"
     inverse: "inAppointment"
+    display: ["show"]
     async: true
-  outBatches: DS.hasMany "batch", 
+    link: true
+  outBatches: DS.hasMany "batch",
+    label: "Exported Loads"
+    description: "The batch loads that were taken out of this warehouse by this appointment"
     inverse: "outAppointment"
+    display: ["show"]
     async: true
+    link: true
 
   pictures: DS.hasMany "picture", async: true
-  truck: DS.belongsTo "truck", async: true
-  weighticket: DS.belongsTo "weighticket", async: true
+  truck: DS.belongsTo "truck", 
+    label: "Appointment Truck"
+    description: "The truck affliated with this appointment"
+    display: ["show"]
+    async: true
+    link: true
+  weighticket: DS.belongsTo "weighticket", 
+    label: "Appointment Weight Ticket"
+    description: "The weight data of the truck affliated with this appointment"
+    display: ["show"]
+    async: true
+    link: true
   
   didCreate: ->
     @_super arguments...

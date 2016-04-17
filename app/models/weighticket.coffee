@@ -38,8 +38,9 @@ Model = DS.Model.extend Timestamps, Relateable, Realtime,
     priority: Importance.Nonessential
     label: "Related Appointment"
     description: "The appointment for which this weight ticket is related to"
-    async: true
     display: ["show", "index"]
+    async: true
+    link: true
 
 Model.aboutMe =
   priority: Importance.Important

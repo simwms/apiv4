@@ -47,6 +47,11 @@ Model = DS.Model.extend Timestamps, Relateable,
     modify: ["new", "edit"]
   latitude: DS.attr "number"
   longitude: DS.attr "number"
-  appointments: DS.hasMany "appointment", async: true
+  appointments: DS.hasMany "appointment",
+    label: "Appointments"
+    description: "The appointments we have had with this company"
+    display: ["show"]
+    async: true
+    link: true
   
 `export default Model`

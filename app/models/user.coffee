@@ -38,19 +38,25 @@ Model = DS.Model.extend Timestamps, RelateableMixin,
   accounts: DS.hasMany "account", 
     label: "My Warehouses"
     description: "These are the warehouse accounts created by (and possibly paid for) by you and where you are the superadmin"
+    display: ["show"]
     async: true
+    link: true
   
   employees: DS.hasMany "employee",
     label: "Warehouse Employment Badge"
     description: "You are an employee at, and can log into, these warehouses"
+    display: ["show"]
     inverse: "user"
     async: true
+    link: true
 
   unconfirmedEmployees: DS.hasMany "employee", 
     label: "Warehouse Employment Requests"
     description: "You have these unopened invitations to work at other warehouse"
     inverse: "unconfirmedUser"
+    display: ["show"]
     async: true
+    link: true
   
 
 `export default Model`

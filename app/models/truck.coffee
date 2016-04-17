@@ -81,6 +81,7 @@ Model = DS.Model.extend Timestamps, Relateable, Realtime, Historical, Multiactio
     description: "The appointment for which this truck is here to fulfill"
     display: ["show", "index"]
     async: true
+    link: true
 
   companyName: DS.attr "string",
     priority: Importance.GoodToHave

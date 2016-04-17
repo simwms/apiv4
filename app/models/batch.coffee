@@ -62,22 +62,25 @@ Model = DS.Model.extend Timestamps, Realtime, Paranoia, Relateable, Historical, 
     priority: Importance.Nonessential
     display: ["show"]
     async: true
+    link: true
 
   outAppointment: DS.belongsTo "appointment",
     label: "Pick Up Appointment"
     description: "The appointment which will pick up this load from our warehouse"
     priority: Importance.Nonessential
     display: ["show"]
-    async: true
     inverse: "outBatches"
+    async: true
+    link: true
 
   inAppointment: DS.belongsTo "appointment",
     label: "Drop Off Appointment"
     description: "The appointment which dropped this load off into our warehouse"
     priority: Importance.Nonessential
     display: ["show"]
-    async: true
     inverse: "inBatches"
+    async: true
+    link: true
 
   pictures: DS.hasMany "picture", async: true
 

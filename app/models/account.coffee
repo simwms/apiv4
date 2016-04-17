@@ -32,7 +32,8 @@ Model = DS.Model.extend Timestamps, Relateable, Paranoia,
     display: ["show"]
     modify: ["model#upgrade"]
     among: -> @store.findAll "service-plan"
-    async: true
     proxyKey: "name"
+    async: true
+    link: true
 
 `export default Model`
